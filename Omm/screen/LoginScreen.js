@@ -1,11 +1,11 @@
 import React from "react";
-import { View, TextInput, Button } from "react-native";
+import { View, TextInput } from "react-native";
 import { LoginCss } from "../css/LoginCss";
 import { useState } from "react";
 import Logo from "../Image/logo.svg";
 import CustomButton from "../Component/CustomButton";
 
-function LoginScreen() {
+function LoginScreen({ navigation }) {
     const [IDtext, onChangeIDText] = useState("");
     const [PWtext, onChangePWText] = useState("");
 
@@ -26,12 +26,14 @@ function LoginScreen() {
                 secureTextEntry={true}
             />
             <CustomButton
-                buttonColor={'#023e71'}
+                buttonColor={'#FFCE50'}
                 title={'로그인'}
             />
             <CustomButton
-                buttonColor={'#023e71'}
-                title={'회원가입'} />
+                buttonColor={'#FF50C3'}
+                title={'회원가입'}
+                onPress={() => navigation.navigate("Resister")}
+            />
         </View>
     );
 }

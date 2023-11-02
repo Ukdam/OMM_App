@@ -8,7 +8,7 @@ export const LoginCss = StyleSheet.create({
     },
     inputID: {
         height: 40,
-        width: 270,
+        width: 300,
         margin: 12,
         borderBottomWidth: 1,
         padding: 10,
@@ -16,18 +16,18 @@ export const LoginCss = StyleSheet.create({
     },
     inputPW: {
         height: 40,
-        width: 270,
+        width: 300,
         margin: 12,
         borderBottomWidth: 1,
         padding: 10,
         fontSize: 15,
-        marginBottom: 140,
+        marginBottom: 100,
     },
     tinyLogo: {
         height: 150,
         width: 150,
-        marginBottom: 80,
-        marginTop: 80,
+        marginBottom: 40,
+        marginTop: 70,
     },
 
 
