@@ -4,18 +4,6 @@ import { styles } from "../css/css";
 
 function HoemScreen({ navigation }) {
   return (
-<<<<<<< Updated upstream
-    <>
-      <View style={styles.container2}>
-        <Text>Open up App</Text>
-        <Button
-          title="Detail 열기"
-          onPress={() => navigation.navigate("Detail")}
-          // onPress={() => navigation.push("Detail")}
-        />
-      </View>
-    </>
-=======
     <View style={styles.container2}>
       <Text>Open up App</Text>
       <StatusBar style="auto" />
@@ -29,7 +17,6 @@ function HoemScreen({ navigation }) {
         onPress={() => navigation.navigate("Login")}
       />
     </View>
->>>>>>> Stashed changes
   );
 }
 
