@@ -1,23 +1,34 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { hstyles } from "../css/headercss";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
 {
   /* <FontAwesome name="bars" size={30} color="#900" /> */
 }
 
-function Header() {
+function Header({ screen }) {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView>
       <View style={hstyles.container}>
         <Text style={hstyles.lefttxt}>
-          <FontAwesomeIcon icon={["fas", "bars"]} size={20} />
+          <FontAwesomeIcon icon={["fas", "bars"]} size={25} />
         </Text>
-        <Text style={hstyles.titletxt}>OMM</Text>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={hstyles.titleContainer}
+        >
+          <Text style={hstyles.titletxt}>OMM</Text>
+        </TouchableOpacity>
+
         <Text style={hstyles.righttxt}>
-          <FontAwesomeIcon icon={["fas", "cart-shopping"]} size={20} />
+          <FontAwesomeIcon icon={["fas", "cart-shopping"]} size={25} />
         </Text>
       </View>
     </SafeAreaView>

@@ -8,20 +8,26 @@ import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginScreen from "../screen/LoginScreen";
 
-
 const NavigationApp = () => {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          header: () => <Header />,
-        }}
-      >
-        <Stack.Screen name="Home" component={HoemScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HoemScreen}
+          options={{ header: () => <Header /> }}
+        />
+        <Stack.Screen
+          name="Detail"
+          component={DetailScreen}
+          options={{ header: () => <Header /> }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ header: () => <Header /> }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
