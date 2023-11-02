@@ -7,6 +7,7 @@ import Header from "./Header";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginScreen from "../screen/LoginScreen";
+import CartScreen from "../screen/CartScreen";
 import ResisterScreen from "../screen/ResisterScreen";
 
 const NavigationApp = () => {
@@ -32,6 +33,11 @@ const NavigationApp = () => {
         <Stack.Screen
           name="Resister"
           component={ResisterScreen}
+          options={{ header: () => <Header /> }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={CartScreen}
           options={{ header: () => <Header /> }}
         />
       </Stack.Navigator>

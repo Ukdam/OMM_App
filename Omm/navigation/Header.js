@@ -28,9 +28,14 @@ function Header({ screen }) {
           <Text style={hstyles.titletxt}>OMM</Text>
         </TouchableOpacity>
 
-        <Text style={hstyles.righttxt}>
-          <FontAwesomeIcon icon={["fas", "cart-shopping"]} size={25} />
-        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Cart")}
+          style={hstyles.rightContainer}
+        >
+          <Text style={hstyles.righttxt}>
+            <FontAwesomeIcon icon={["fas", "cart-shopping"]} size={25} />
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
