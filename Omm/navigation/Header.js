@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+
 {
   /* <FontAwesome name="bars" size={30} color="#900" /> */
 }
@@ -14,7 +15,7 @@ function Header({ screen }) {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, paddingTop: 0 }}>
       <View style={hstyles.container}>
         <Text style={hstyles.lefttxt}>
           <FontAwesomeIcon icon={["fas", "bars"]} size={25} />

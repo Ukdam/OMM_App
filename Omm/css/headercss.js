@@ -7,10 +7,10 @@ export const hstyles = StyleSheet.create({
     height: 55,
     backgroundColor: "#D6E7CB",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
   },
   titletxt: {
-    flexGrow: 1,
+    // flexGrow: 1,
     fontSize: 25,
     textAlign: "center",
     fontStyle: "italic",
@@ -19,12 +19,14 @@ export const hstyles = StyleSheet.create({
     lineHeight: 50,
   },
   lefttxt: {
-    flexGrow: 0.1,
+    // flexGrow: 0.1,
     textAlign: "center",
+    marginLeft: 10,
   },
   righttxt: {
-    flexGrow: 0.1,
+    // flexGrow: 0.1,
     textAlign: "center",
+    marginRight: 10,
   },
   titleContainer: {
     flexGrow: 1,
