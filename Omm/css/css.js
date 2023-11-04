@@ -3,27 +3,25 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#a7a7a7",
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   banner_container: {
-    flex: 1.4,
+    flex: 1.6,
     backgroundColor: "#a7a7a7",
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    top: 40,
+    top: 0,
   },
   main_container: {
     flex: 1,
     backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
     width: "100%",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    // overflow: "scroll",
+    bottom: 40,
   },
   wrapper: {},
   slide1: {
@@ -32,7 +30,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#9DD6EB",
     position: "relative",
-    overflow: "hidden",
     objectFit: "cover",
   },
   slide2: {
