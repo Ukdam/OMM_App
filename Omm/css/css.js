@@ -18,12 +18,12 @@ export const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     width: "100%",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    overflow: "scroll",
+    // overflow: "scroll",
   },
   wrapper: {},
   slide1: {
@@ -78,6 +78,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
+    marginTop: 10,
   },
   login_txt1: {
     fontSize: 20,
@@ -101,7 +102,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 30,
   },
   btn_box: {
     width: 100,
@@ -121,12 +122,13 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderTopWidth: 1,
-    marginTop: 10,
+    marginTop: 15,
     // backgroundColor: "lightskyblue",
   },
   point_box: {
     width: 100,
     textAlign: "center",
+    marginTop: 15,
   },
   pointtxt: {
     fontWeight: "bold",
@@ -140,9 +142,11 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   zzim_container: {
-    flex: 0.1,
-    width: "100%",
-    backgroundColor: "#575757",
+    flex: 1,
+    backgroundColor: "#a7a7a7",
+    flexDirection: "row",
+    padding: 10,
+    marginTop: 30,
   },
 });
 

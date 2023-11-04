@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  View,
-  Button,
-  Text,
-  Image,
-  ViewComponent,
-  TouchableOpacity,
-} from "react-native";
-import { styles, swiper_style } from "../css/css";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { styles } from "../css/css";
 import Swiper from "react-native-swiper";
 import ImgEvent1 from "../Image/Banner01.svg";
 import ImgEvent2 from "../Image/Banner02.svg";
 import ImgEvent3 from "../Image/Banner03.svg";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import CustomButton02 from "../Component/CustomButton02";
+import ZzimCard from "../Component/ZzimCard";
 
 function HoemScreen({ navigation }) {
   return (
@@ -23,8 +16,8 @@ function HoemScreen({ navigation }) {
           style={styles.wrapper}
           showsButtons={true}
           loop
-          autoplay
-          autoplayTimeout={20}
+          // autoplay
+          // autoplayTimeout={20}
           paginationStyle={{ bottom: 55 }}
         >
           <View style={styles.slide1}>
@@ -41,7 +34,7 @@ function HoemScreen({ navigation }) {
           </View>
         </Swiper>
       </View>
-      <View style={styles.main_container}>
+      <ScrollView style={styles.main_container}>
         <View style={styles.login_container}>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={styles.login_txt1}>로그인</Text>
@@ -70,12 +63,13 @@ function HoemScreen({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.zzim_container}>
-          <Text>asd</Text>
-        </View>
-
-        {/* <Button title="Login" onPress={() => navigation.navigate("Login")} /> */}
-      </View>
+        {/* ContentContainerStyle={styles.} */}
+        <ScrollView style={styles.zzim_container} horizontal>
+          <ZzimCard />
+          <ZzimCard />
+          <ZzimCard />
+        </ScrollView>
+      </ScrollView>
     </View>
   );
 }
