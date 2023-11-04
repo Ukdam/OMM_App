@@ -1,9 +1,15 @@
 import React from "react";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  DrawerItemList,
+  createDrawerNavigator,
+} from "@react-navigation/drawer";
 import { StackNavigation } from "./StackNavigation";
 import DetailScreen from "../screen/DetailScreen";
 import Header from "./Header";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, StyleSheet, Text, View } from "react-native";
+import DrawerUI from "../Component/DrawerUI";
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +22,11 @@ const DrawerNavigation = () => {
         headerShown: true,
         header: () => <Header />,
       }}
+      drawerContent={({ navigation }) => (
+        <SafeAreaView>
+          <DrawerUI navigation={navigation} />
+        </SafeAreaView>
+      )}
     >
       <Drawer.Screen
         name="Home"

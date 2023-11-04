@@ -17,31 +17,11 @@ const StackNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main" component={HoemScreen} />
-      <Stack.Screen
-        name="Detail"
-        component={DetailScreen}
-        // options={{ header: () => <Header /> }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        // options={{ header: () => <Header /> }}
-      />
-      <Stack.Screen
-        name="Resister"
-        component={ResisterScreen}
-        // options={{ header: () => <Header /> }}
-      />
-      <Stack.Screen
-        name="Cart"
-        component={CartScreen}
-        // options={{ header: () => <Header /> }}
-      />
-      <Stack.Screen
-        name="Resister2"
-        component={ResisterScreen2}
-        // options={{ header: () => <Header /> }}
-      />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Resister" component={ResisterScreen} />
+      <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen name="Resister2" component={ResisterScreen2} />
       <Stack.Screen name="주소찾기" component={SearchAddress} />
     </Stack.Navigator>
   );
