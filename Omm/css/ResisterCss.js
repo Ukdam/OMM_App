@@ -9,8 +9,8 @@ export const ResisterCss = StyleSheet.create({
     tinyLogo: {
         height: 150,
         width: 150,
-        marginBottom: 30,
-        marginTop: 70,
+        marginBottom: 10,
+        marginTop: 60,
     },
     inputID: {
         height: 40,

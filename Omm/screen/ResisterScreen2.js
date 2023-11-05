@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import Logo from "../Image/logo.svg";
+import CustomButton from "../Component/CustomButton";
 
 function ResisterScreen2({ route, navigation }) {
     const [Address, setAdress] = useState("");
@@ -28,6 +29,11 @@ function ResisterScreen2({ route, navigation }) {
                 placeholder="상세 주소를 입력하세요"
                 value={Address}
                 onChange={setAdress}
+            />
+            <CustomButton
+                buttonColor={'#FF50C3'}
+                title={'다음'}
+                onPress={() => navigation.navigate("Resister3")}
             />
         </View>
     );

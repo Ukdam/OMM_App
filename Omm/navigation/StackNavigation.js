@@ -11,6 +11,7 @@ import CartScreen from "../screen/CartScreen";
 import ResisterScreen from "../screen/ResisterScreen";
 import ResisterScreen2 from "../screen/ResisterScreen2";
 import SearchAddress from "../Component/SearchAddress";
+import ResisterScreen3 from "../screen/ResisterScreen3";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -23,6 +24,7 @@ const StackNavigation = () => {
       <Stack.Screen name="Cart" component={CartScreen} />
       <Stack.Screen name="Resister2" component={ResisterScreen2} />
       <Stack.Screen name="주소찾기" component={SearchAddress} />
+      <Stack.Screen name="Resister3" component={ResisterScreen3} />
     </Stack.Navigator>
   );
 };

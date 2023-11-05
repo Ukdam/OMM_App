@@ -14,8 +14,8 @@ export const ResisterCss2 = StyleSheet.create({
     tinyLogo: {
         height: 150,
         width: 150,
-        marginBottom: 30,
-        marginTop: 70,
+        marginBottom: 60,
+        marginTop: 60,
     },
     btn: {
         backgroundColor: "#000",
@@ -56,7 +56,9 @@ export const ResisterCss2 = StyleSheet.create({
         height: 50,
         fontSize: 15,
         borderRadius: 15,
-        paddingLeft: 30
+        paddingLeft: 30,
+        marginBottom: 80,
+
     }
 
 })

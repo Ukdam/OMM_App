@@ -21,13 +21,13 @@ export const LoginCss = StyleSheet.create({
         borderBottomWidth: 1,
         padding: 10,
         fontSize: 15,
-        marginBottom: 100,
+        marginBottom: 90,
     },
     tinyLogo: {
         height: 150,
         width: 150,
-        marginBottom: 40,
-        marginTop: 70,
+        marginBottom: 50,
+        marginTop: 60,
     },
 
 });
