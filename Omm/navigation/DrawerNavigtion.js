@@ -19,8 +19,8 @@ const DrawerNavigation = () => {
       initialRouteName="Home"
       drawerType="front"
       screenOptions={{
-        headerShown: true,
-        header: () => <Header />,
+        headerShown: false,
+        // header: () => <Header />,
       }}
       drawerContent={({ navigation }) => (
         <SafeAreaView>

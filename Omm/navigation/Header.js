@@ -10,7 +10,7 @@ function Header({}) {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 0, paddingBottom: 0 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: 0, marginBottom: 55 }}>
       <View style={hstyles.container}>
         <TouchableOpacity
           onPress={() => {
@@ -30,7 +30,7 @@ function Header({}) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("Cart")}
+          onPress={() => navigation.navigate("Payment_D")}
           style={hstyles.rightContainer}
         >
           <Text style={hstyles.righttxt}>
