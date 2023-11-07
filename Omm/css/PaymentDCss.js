@@ -96,7 +96,7 @@ export const pstyles = StyleSheet.create({
     minHeight: 60,
     height: "auto",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "90%",
   },
 

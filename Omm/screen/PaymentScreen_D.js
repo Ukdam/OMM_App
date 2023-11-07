@@ -1,9 +1,36 @@
-import React from "react";
-import { View, Text, ScrollView, SafeAreaView, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  Button,
+  TextInput,
+} from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
+import { CheckBox } from "@rneui/themed";
+import DropDownPicker from "react-native-dropdown-picker";
 
 function PaymentScreen_D() {
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+  const [radioIndex, setRadioIndex] = useState(0);
+
+  // select
+  const [selectOpen, setSelectOpen] = useState(false);
+  const [selectValue, setSelectValue] = useState(null);
+  const [selectItems, setSelectItems] = useState([
+    { label: "요청사항을 선택해주세요.", value: null },
+    {
+      label: "도착 후 전화주시면 직접 받으러 갈게요.",
+      value: "도착 후 전화주시면 직접 받으러 갈게요.",
+    },
+    { label: "직접 입력", value: "직접 입력" },
+  ]);
+
+  // textarea
+  const [textAValue, setTextAValue] = useState("");
   return (
     <>
       <ScrollView
@@ -50,6 +77,11 @@ function PaymentScreen_D() {
             </Text>
           </View>
         </View>
+
+        {/* 
+          요청사항 
+        */}
+
         <View style={pstyles.reqeust_container}>
           <View style={pstyles.reqeust_titlebox}>
             <Text
@@ -62,13 +94,77 @@ function PaymentScreen_D() {
             </Text>
           </View>
           <View style={pstyles.reqeust_checkbox}>
-            <Text>문 앞에 놓고 문자주세요</Text>
-            <Text>일회용 수저, 포크가 필요해요</Text>
+            <CheckBox
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              title="문 앞에 놓고 문자주세요"
+            />
+            <CheckBox
+              checked={check2}
+              onPress={() => setCheck2(!check2)}
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              title="일회용 수저, 포크가 필요해요"
+            />
           </View>
-          <View style={pstyles.reqeust_selectbox}>
-            <Text>요청 사항을 선택해주세요</Text>
+          <View
+            style={[
+              pstyles.reqeust_selectbox,
+              { height: selectOpen || selectValue === "직접 입력" ? 200 : 60 },
+              // { height: selectValue === "직접 입력" ? 200 : 60 },
+            ]}
+          >
+            <DropDownPicker
+              open={selectOpen}
+              value={selectValue}
+              items={selectItems}
+              setOpen={setSelectOpen}
+              setValue={setSelectValue}
+              setItems={setSelectItems}
+              placeholder="요청 사항을 선택해주세요"
+              dropDownContainerStyle={{
+                borderColor: "#d8d9da",
+                borderWidth: 2,
+              }}
+              style={{ borderColor: "#d8d9da", borderWidth: 2 }}
+            />
+            {selectValue === "직접 입력" ? (
+              <>
+                <TextInput
+                  editable
+                  multiline
+                  numberOfLines={4}
+                  maxLength={40}
+                  onChangeText={(text) => setTextAValue(text)}
+                  value={textAValue}
+                  style={{
+                    borderColor: "#d8d9da",
+                    borderWidth: 2,
+                    width: "100%",
+                    padding: 5,
+                    marginTop: 15,
+                    borderRadius: 10,
+                  }}
+                  placeholder="직접 입력"
+                />
+                <Text
+                  style={{
+                    alignSelf: "flex-end",
+                    color: "#61677a",
+                    marginTop: 5,
+                  }}
+                >
+                  {textAValue.length} / 40
+                </Text>
+              </>
+            ) : null}
           </View>
         </View>
+        {/* 결제수단 */}
         <View style={pstyles.payment_container}>
           <View style={pstyles.payment_titlebox}>
             <Text
@@ -81,8 +177,20 @@ function PaymentScreen_D() {
             </Text>
           </View>
           <View style={pstyles.payment_checkbox}>
-            <Text>신용 카드</Text>
-            <Text>현장 결제</Text>
+            <CheckBox
+              checked={radioIndex === 0}
+              onPress={() => setRadioIndex(0)}
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              title="신용 카드"
+            />
+            <CheckBox
+              checked={radioIndex === 1}
+              onPress={() => setRadioIndex(1)}
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              title="현장 결제"
+            />
           </View>
         </View>
         <View style={pstyles.amount_container}>

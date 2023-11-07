@@ -38,10 +38,11 @@ function DrawerUI({ navigation }) {
     },
     // -------------------------------
     list_container: {
-      width: "100%",
+      width: "90%",
       height: "25%",
-      borderWidth: 1,
-      borderColor: "skyblue",
+      alignSelf: "center",
+      borderTopWidth: 2,
+      borderColor: "darkgray",
     },
     list_adressbox: {
       flex: 1,
@@ -62,8 +63,6 @@ function DrawerUI({ navigation }) {
     remain_container: {
       width: "100%",
       height: "45%",
-      borderWidth: 1,
-      borderColor: "lightgreen",
     },
   });
 
@@ -122,7 +121,7 @@ function DrawerUI({ navigation }) {
             <FontAwesomeIcon
               icon={["fas", "receipt"]}
               size={25}
-              style={{ color: "darkblue", marginRight: 5 }}
+              style={{ color: "gray", marginRight: 5 }}
             />
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>주문내역</Text>
           </View>
@@ -130,7 +129,7 @@ function DrawerUI({ navigation }) {
             <FontAwesomeIcon
               icon={["fas", "gear"]}
               size={25}
-              style={{ color: "darkblue", marginRight: 5 }}
+              style={{ color: "gray", marginRight: 5 }}
             />
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>환경설정</Text>
           </View>
