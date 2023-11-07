@@ -12,6 +12,7 @@ import ResisterScreen from "../screen/ResisterScreen";
 import ResisterScreen2 from "../screen/ResisterScreen2";
 import SearchAddress from "../Component/SearchAddress";
 import ResisterScreen3 from "../screen/ResisterScreen3";
+import SearchShopScreen from "../screen/SearchShopScreen"
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -48,11 +49,7 @@ const StackNavigation = () => {
         options={{ header: () => <Header /> }}
       />
       <Stack.Screen name="주소찾기" component={SearchAddress} />
-      <Stack.Screen
-        name="Resister3"
-        component={ResisterScreen3}
-        options={{ header: () => <Header /> }}
-      />
+      <Stack.Screen name="Resister3" component={ResisterScreen3} />
     </Stack.Navigator>
   );
 };

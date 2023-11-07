@@ -54,7 +54,7 @@ function HoemScreen({ navigation }) {
           </View>
           <View style={styles.btn_container}>
             <View style={styles.btn_box}>
-              <CustomButton02 buttonColor={"#FFCEaa"} title={"배달"} />
+              <CustomButton02 buttonColor={"#FFCEaa"} title={"배달"} onPress={() => navigation.navigate("SearchShop")} />
               <Text style={styles.btntxt}>배달</Text>
             </View>
             <View style={styles.btn_box}>

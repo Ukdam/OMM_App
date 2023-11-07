@@ -15,16 +15,32 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.deliver.Omm",
+      "buildNumber": "1.0.0",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDllsZWfu5CHWDrtGCCHfyOFOXPFrxt33M"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.anonymous.Omm",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBa2uLN3VvZpWkVKUQ_fWmVLgwR5RHx7hk"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dc6c4eac-4796-4638-b272-8b0ff5a65fa7"
+      }
     }
   }
 }

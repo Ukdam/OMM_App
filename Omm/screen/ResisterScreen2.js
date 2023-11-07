@@ -17,7 +17,7 @@ function ResisterScreen2({ route, navigation }) {
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={ResisterCss2.btn}
-                    onPress={() => navigation.navigate('주소찾기')}>
+                    onPress={() => navigation.push('주소찾기')}>
                     <Text style={ResisterCss2.btn_text}>우편번호 찾기</Text>
                 </TouchableOpacity>
             </View>
