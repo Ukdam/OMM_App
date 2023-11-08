@@ -12,7 +12,7 @@ import ResisterScreen from "../screen/ResisterScreen";
 import ResisterScreen2 from "../screen/ResisterScreen2";
 import SearchAddress from "../Component/SearchAddress";
 import ResisterScreen3 from "../screen/ResisterScreen3";
-import SearchShopScreen from "../screen/SearchShopScreen"
+import SearchShopScreen from "../screen/SearchShopScreen";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
