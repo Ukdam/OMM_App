@@ -1,16 +1,16 @@
 import React from "react";
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View, Text, Button, TouchableOpacity, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { hstyles } from "../css/headercss";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { FontAwesome } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 
-function Header({}) {
+function Header({ }) {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 0, marginBottom: 55 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: 0, marginBottom: Platform.OS === 'ios' ? 20 : 55 }}>
       <View style={hstyles.container}>
         <TouchableOpacity
           onPress={() => {

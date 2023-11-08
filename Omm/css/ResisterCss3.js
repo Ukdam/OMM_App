@@ -35,7 +35,6 @@ export const ResisterCss3 = StyleSheet.create({
         borderBottomWidth: 1
     },
     btnContainer: {
-        position: "absolute",
-        bottom: 25,
+        marginTop: 130,
     }
 })

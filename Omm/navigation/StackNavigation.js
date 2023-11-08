@@ -49,7 +49,16 @@ const StackNavigation = () => {
         options={{ header: () => <Header /> }}
       />
       <Stack.Screen name="주소찾기" component={SearchAddress} />
-      <Stack.Screen name="Resister3" component={ResisterScreen3} />
+      <Stack.Screen
+        name="Resister3"
+        component={ResisterScreen3}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="SearchShop"
+        component={SearchShopScreen}
+        options={{ header: () => <Header /> }}
+      />
     </Stack.Navigator>
   );
 };

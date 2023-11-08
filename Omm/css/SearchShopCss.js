@@ -8,7 +8,21 @@ export const SearchShopCss = StyleSheet.create({
     },
     MapContainer: {
         width: "100%",
-        height: "40%",
+        height: "35%",
+        backgroundColor: "#f0f0f0"
+    },
+    SText: {
+        margin: 30,
+        fontSize: 16,
+    },
+    ListContainer: {
+        width: "90%",
+        height: "45%",
+    },
+    Ltext: {
+        fontSize: 18,
+        textAlign: 'center',
         backgroundColor: "#f0f0f0"
     }
+
 })
