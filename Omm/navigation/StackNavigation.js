@@ -13,6 +13,8 @@ import ResisterScreen2 from "../screen/ResisterScreen2";
 import SearchAddress from "../Component/SearchAddress";
 import ResisterScreen3 from "../screen/ResisterScreen3";
 import SearchShopScreen from "../screen/SearchShopScreen";
+import SettingScreen from "../screen/SettingScreen";
+import MyProfileScreen from "../screen/MyProfileScreen";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -57,6 +59,16 @@ const StackNavigation = () => {
       <Stack.Screen
         name="SearchShop"
         component={SearchShopScreen}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="Setting"
+        component={SettingScreen}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
         options={{ header: () => <Header /> }}
       />
     </Stack.Navigator>

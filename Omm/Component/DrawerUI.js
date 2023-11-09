@@ -82,7 +82,11 @@ function DrawerUI({ navigation }) {
                 size={100}
                 style={{ color: "gray" }}
               />
-              <JangBtn title={"내 정보"} />
+              <JangBtn
+                title={"내 정보"}
+                onPress={() => navigation.navigate("MyProfile")}
+                ver={"1"}
+              />
             </View>
             <View style={styles.profile_box}>
               <Text style={{ fontSize: 22 }}>등급</Text>
