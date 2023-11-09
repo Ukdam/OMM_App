@@ -5,12 +5,13 @@ export const ShopListCss = StyleSheet.create({
         flex: 1,
     },
     separator: {
-        backgroundColor: '#e0e0e0',
+        backgroundColor: '#f0f0f0',
         height: 1,
     },
     item: {
         flexDirection: 'row',
-        padding: 16,
+        padding: 12,
+        borderBottomWidth: 1,
     },
 
     text: {

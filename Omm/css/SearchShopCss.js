@@ -12,7 +12,7 @@ export const SearchShopCss = StyleSheet.create({
         backgroundColor: "#f0f0f0"
     },
     SText: {
-        margin: 30,
+        margin: '15%',
         fontSize: 16,
     },
     ListContainer: {
@@ -21,6 +21,7 @@ export const SearchShopCss = StyleSheet.create({
     },
     Ltext: {
         fontSize: 18,
+        padding: 14,
         textAlign: 'center',
         backgroundColor: "#f0f0f0"
     }
