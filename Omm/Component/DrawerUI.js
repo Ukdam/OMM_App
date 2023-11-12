@@ -1,6 +1,12 @@
 import { DrawerItemList } from "@react-navigation/drawer";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import JangBtn from "./JangBtn";
 import { color } from "react-native-elements/dist/helpers";
@@ -121,22 +127,28 @@ function DrawerUI({ navigation }) {
             </Text>
             <Text style={{ fontSize: 10, color: "gray" }}>자세한 주소</Text>
           </View>
-          <View style={styles.list_historybox}>
+          <TouchableOpacity
+            style={styles.list_historybox}
+            onPress={() => navigation.navigate("History")}
+          >
             <FontAwesomeIcon
               icon={["fas", "receipt"]}
               size={25}
               style={{ color: "gray", marginRight: 5 }}
             />
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>주문내역</Text>
-          </View>
-          <View style={styles.list_settingbox}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.list_settingbox}
+            onPress={() => navigation.navigate("Setting")}
+          >
             <FontAwesomeIcon
               icon={["fas", "gear"]}
               size={25}
               style={{ color: "gray", marginRight: 5 }}
             />
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>환경설정</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         {/* 
         

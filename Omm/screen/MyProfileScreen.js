@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { mpstyles } from "../css/MyProfileCss";
 import JangBtn from "../Component/JangBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-function MyProfileScreen() {
-  const [idValue, setIdValue] = useState("");
-  const [passValue, setPassValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
-  const [emailValue, setEmailValue] = useState("");
-  const [adressValue, setAdressValue] = useState("");
-
+function MyProfileScreen({ navigation }) {
   return (
     <View style={mpstyles.main_container}>
       <View style={mpstyles.avatar_container}>
@@ -27,39 +21,18 @@ function MyProfileScreen() {
          */}
 
         <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>아이디</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <View
-              style={{
-                width: "90%",
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <View style={{ flex: 8, marginRight: 10 }}>
-                <TextInput
-                  editable={false}
-                  maxLength={10}
-                  onChangeText={(text) => setIdValue(text)}
-                  value={idValue}
-                  style={{
-                    borderColor: "#aaaaaa",
-                    borderWidth: 2,
-                    width: "100%",
-                    padding: 3,
-                  }}
-                  placeholder="아이디"
-                />
-              </View>
-              <View style={{ flex: 1, opacity: 0 }}>
-                <JangBtn title={"변경"} ver={"3"} />
-              </View>
-            </View>
-          </View>
+          <Text style={mpstyles.titleTxt}>아이디</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("아이디 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
 
         {/*
@@ -67,39 +40,18 @@ function MyProfileScreen() {
          */}
 
         <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>비밀번호</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <View
-              style={{
-                width: "90%",
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <View style={{ flex: 8, marginRight: 10 }}>
-                <TextInput
-                  editable={true}
-                  maxLength={10}
-                  onChangeText={(text) => setPassValue(text)}
-                  value={passValue}
-                  style={{
-                    borderColor: "#aaaaaa",
-                    borderWidth: 2,
-                    width: "100%",
-                    padding: 3,
-                  }}
-                  placeholder="비밀번호"
-                />
-              </View>
-              <View style={{ flex: 1 }}>
-                <JangBtn title={"변경"} ver={"3"} />
-              </View>
-            </View>
-          </View>
+          <Text style={mpstyles.titleTxt}>비밀번호</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("비밀번호 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>qwe***</Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
 
         {/*
@@ -107,12 +59,18 @@ function MyProfileScreen() {
          */}
 
         <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>이름</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <Text>내용</Text>
-          </View>
+          <Text style={mpstyles.titleTxt}>이름</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("이름 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
 
         {/*
@@ -120,12 +78,20 @@ function MyProfileScreen() {
          */}
 
         <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>이메일</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <Text>내용</Text>
-          </View>
+          <Text style={mpstyles.titleTxt}>이메일</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("이메일 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>
+              Test@test.com
+            </Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
 
         {/*
@@ -133,25 +99,39 @@ function MyProfileScreen() {
          */}
 
         <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>연락처</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <Text>내용</Text>
-          </View>
+          <Text style={mpstyles.titleTxt}>연락처</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("연락처 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>
+              010-12**-56**
+            </Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
 
         {/*
          주소 
          */}
 
-        <View style={mpstyles.__container}>
-          <View style={mpstyles.main_box}>
-            <Text style={{ fontSize: 16 }}>주소</Text>
-          </View>
-          <View style={mpstyles.sub_box}>
-            <Text>내용</Text>
-          </View>
+        <View style={mpstyles.__containerlast}>
+          <Text style={mpstyles.titleTxt}>주소</Text>
+          <TouchableOpacity
+            onPress={() => navigation.push("주소 변경")}
+            style={{ flexDirection: "row", marginRight: 3 }}
+          >
+            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <FontAwesomeIcon
+              icon={["fas", "caret-right"]}
+              size={25}
+              style={{ color: "gray" }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
 

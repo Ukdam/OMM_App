@@ -15,6 +15,14 @@ import ResisterScreen3 from "../screen/ResisterScreen3";
 import SearchShopScreen from "../screen/SearchShopScreen";
 import SettingScreen from "../screen/SettingScreen";
 import MyProfileScreen from "../screen/MyProfileScreen";
+import IDEditScreen from "../screen/MyProfile/IDEditScreen";
+import PASSEditScreen from "../screen/MyProfile/PASSEditScreen";
+import NAMEEditScreen from "../screen/MyProfile/NAMEEditScreen";
+import EMAILEditScreen from "../screen/MyProfile/EMAILEditScreen";
+import PHONEEditScreen from "../screen/MyProfile/PHONEEditScreen";
+import ADRESSEditScreen from "../screen/MyProfile/ADRESSEditScreen";
+import OrderHistoryScreen from "../screen/OrderHistoryScreen";
+import HistoryDetailScreen from "../screen/HistoryDetailScreen";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -67,10 +75,27 @@ const StackNavigation = () => {
         options={{ header: () => <Header /> }}
       />
       <Stack.Screen
+        name="History"
+        component={OrderHistoryScreen}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen name="주문 상세" component={HistoryDetailScreen} />
+
+      {/* 
+      내 정보 수정 관련
+      */}
+      <Stack.Screen
         name="MyProfile"
         component={MyProfileScreen}
         options={{ header: () => <Header /> }}
       />
+      <Stack.Screen name="아이디 변경" component={IDEditScreen} />
+      <Stack.Screen name="비밀번호 변경" component={PASSEditScreen} />
+      <Stack.Screen name="이름 변경" component={NAMEEditScreen} />
+      <Stack.Screen name="이메일 변경" component={EMAILEditScreen} />
+      <Stack.Screen name="연락처 변경" component={PHONEEditScreen} />
+      <Stack.Screen name="주소 변경" component={SearchAddress} />
+      {/* <Stack.Screen name="주소 변경" component={ADRESSEditScreen} /> */}
     </Stack.Navigator>
   );
 };
