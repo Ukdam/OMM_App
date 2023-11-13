@@ -17,7 +17,7 @@ function FlatListTest({ navigation }) {
             renderItem={({ item }) => (
                 <TouchableOpacity
                     style={ShopListCss.item}
-                    onPress={() => navigation.navigate("Resister3")}
+                    onPress={() => navigation.navigate("SelectProduct")}
                 >
                     <Text style={ShopListCss.text}>
                         {item.text}
