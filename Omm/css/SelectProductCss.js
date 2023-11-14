@@ -13,12 +13,16 @@ export const SelectProductCss = StyleSheet.create({
         width: "95%"
     },
     ProductContainer: {
+        flex: 1,
         backgroundColor: "#FFEFC8",
         width: "100%",
         height: "100%",
-        borderRadius: 50,
+        borderRadius: 30,
 
-
+    },
+    ButtonContainer: {
+        marginLeft: "15%",
+        marginBottom: "7%"
     }
 
 })
