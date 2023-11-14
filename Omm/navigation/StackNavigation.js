@@ -15,7 +15,6 @@ import ResisterScreen3 from "../screen/ResisterScreen3";
 import SearchShopScreen from "../screen/SearchShopScreen";
 import SettingScreen from "../screen/SettingScreen";
 import MyProfileScreen from "../screen/MyProfileScreen";
-<<<<<<< Updated upstream
 import IDEditScreen from "../screen/MyProfile/IDEditScreen";
 import PASSEditScreen from "../screen/MyProfile/PASSEditScreen";
 import NAMEEditScreen from "../screen/MyProfile/NAMEEditScreen";
@@ -24,9 +23,7 @@ import PHONEEditScreen from "../screen/MyProfile/PHONEEditScreen";
 import ADRESSEditScreen from "../screen/MyProfile/ADRESSEditScreen";
 import OrderHistoryScreen from "../screen/OrderHistoryScreen";
 import HistoryDetailScreen from "../screen/HistoryDetailScreen";
-=======
 import SelectProductScreen from "../screen/SelectProductScreen";
->>>>>>> Stashed changes
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -83,6 +80,11 @@ const StackNavigation = () => {
         component={OrderHistoryScreen}
         options={{ header: () => <Header /> }}
       />
+      <Stack.Screen
+        name="SelectProduct"
+        component={SelectProductScreen}
+        options={{ header: () => <Header /> }}
+      />
       <Stack.Screen name="주문 상세" component={HistoryDetailScreen} />
 
       {/* 
@@ -93,7 +95,6 @@ const StackNavigation = () => {
         component={MyProfileScreen}
         options={{ header: () => <Header /> }}
       />
-<<<<<<< Updated upstream
       <Stack.Screen name="아이디 변경" component={IDEditScreen} />
       <Stack.Screen name="비밀번호 변경" component={PASSEditScreen} />
       <Stack.Screen name="이름 변경" component={NAMEEditScreen} />
@@ -101,14 +102,8 @@ const StackNavigation = () => {
       <Stack.Screen name="연락처 변경" component={PHONEEditScreen} />
       <Stack.Screen name="주소 변경" component={SearchAddress} />
       {/* <Stack.Screen name="주소 변경" component={ADRESSEditScreen} /> */}
-=======
-      <Stack.Screen
-        name="SelectProduct"
-        component={SelectProductScreen}
-        options={{ header: () => <Header /> }}
-      />
->>>>>>> Stashed changes
-    </Stack.Navigator>
+
+    </Stack.Navigator >
   );
 };
 
