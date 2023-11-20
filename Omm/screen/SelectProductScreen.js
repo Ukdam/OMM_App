@@ -6,18 +6,14 @@ import TapView from "../Component/TapView"
 import CustomButton from "../Component/CustomButton"
 
 
-function SelectProductScreen() {
+function SelectProductScreen({ navigation }) {
     return (
         <View style={SelectProductCss.container}>
             <View style={SelectProductCss.ImageContainer}>
-                <Dish />
+
             </View>
             <View style={SelectProductCss.ProductContainer}>
-                <TapView />
-                <View style={SelectProductCss.ButtonContainer}>
-                    <CustomButton />
-                </View>
-
+                <TapView navigation={navigation} />
             </View>
         </View>
     )
