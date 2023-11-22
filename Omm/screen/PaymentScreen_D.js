@@ -11,8 +11,9 @@ import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
 import { CheckBox } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
+import TossPayment from "../Component/TossPayment";
 
-function PaymentScreen_D() {
+function PaymentScreen_D({ navigation }) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [radioIndex, setRadioIndex] = useState(0);
@@ -230,7 +231,10 @@ function PaymentScreen_D() {
         <View style={pstyles.blank}></View>
       </ScrollView>
       <View style={pstyles.btn_container}>
-        <JangBtnPay title={"결제 하기"} />
+        <JangBtnPay
+          title={"결제 하기"}
+          onPress={() => navigation.push("토스")}
+        />
       </View>
     </>
   );

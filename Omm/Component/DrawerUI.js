@@ -1,6 +1,7 @@
 import { DrawerItemList } from "@react-navigation/drawer";
-import React from "react";
+import React, { useContext } from "react";
 import {
+  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,6 +11,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import JangBtn from "./JangBtn";
 import { color } from "react-native-elements/dist/helpers";
+import { UserContext } from "../contexts/UserContext";
+import { DrawerActions } from "@react-navigation/native";
 
 function DrawerUI({ navigation }) {
   const styles = StyleSheet.create({
@@ -69,8 +72,36 @@ function DrawerUI({ navigation }) {
     remain_container: {
       width: "100%",
       height: "45%",
+      justifyContent: "flex-end",
+    },
+    logout_btn: {
+      width: 70,
+      height: 30,
+      backgroundColor: "tomato",
+      borderRadius: 10,
+      textAlign: "center",
+      alignSelf: "center",
+      lineHeight: 25,
+      color: "white",
+      marginBottom: 20,
     },
   });
+
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  const username = userInfo?.username;
+  const name = userInfo?.name;
+  const mainadress = userInfo?.mainadress;
+  const sideadress = userInfo?.sideadress;
+
+  function logout() {
+    fetch("http://192.168.35.2:4000/logout", {
+      credentials: "include",
+      method: "POST",
+    });
+    navigation.dispatch(DrawerActions.closeDrawer());
+    setUserInfo(null);
+  }
 
   return (
     <>
@@ -156,7 +187,13 @@ function DrawerUI({ navigation }) {
     
         */}
         <View style={styles.remain_container}>
-          <Text>빈 공간</Text>
+          {username ? (
+            <TouchableOpacity onPress={logout}>
+              <Text style={styles.logout_btn}>로그아웃</Text>
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
         </View>
       </View>
     </>

@@ -9,12 +9,16 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./navigation/DrawerNavigtion";
 
+import { UserContextProvider } from "./contexts/UserContext";
+
 library.add(fas, far);
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <DrawerNavigation />
-    </NavigationContainer>
+    <UserContextProvider>
+      <NavigationContainer>
+        <DrawerNavigation />
+      </NavigationContainer>
+    </UserContextProvider>
   );
 }

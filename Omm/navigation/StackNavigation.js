@@ -24,6 +24,7 @@ import ADRESSEditScreen from "../screen/MyProfile/ADRESSEditScreen";
 import OrderHistoryScreen from "../screen/OrderHistoryScreen";
 import HistoryDetailScreen from "../screen/HistoryDetailScreen";
 import SelectProductScreen from "../screen/SelectProductScreen";
+import TossPayment from "../Component/TossPayment";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -54,6 +55,9 @@ const StackNavigation = () => {
         component={PaymentScreen_D}
         options={{ header: () => <Header /> }}
       />
+
+      {/* <Stack.Screen name="토스" component={TossPayment} /> */}
+
       <Stack.Screen
         name="Resister2"
         component={ResisterScreen2}
@@ -102,8 +106,7 @@ const StackNavigation = () => {
       <Stack.Screen name="연락처 변경" component={PHONEEditScreen} />
       <Stack.Screen name="주소 변경" component={SearchAddress} />
       {/* <Stack.Screen name="주소 변경" component={ADRESSEditScreen} /> */}
-
-    </Stack.Navigator >
+    </Stack.Navigator>
   );
 };
 

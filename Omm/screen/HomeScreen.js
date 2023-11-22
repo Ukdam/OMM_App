@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "../css/css";
 import Swiper from "react-native-swiper";
@@ -7,8 +7,31 @@ import ImgEvent2 from "../Image/Banner02.svg";
 import ImgEvent3 from "../Image/Banner03.svg";
 import CustomButton02 from "../Component/CustomButton02";
 import ZzimCard from "../Component/ZzimCard";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 function HoemScreen({ navigation }) {
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch("http://192.168.35.2:4000/profile", {
+      credentials: "include",
+    })
+      .then((res) => {
+        res.json().then((userInfo) => {
+          setUserInfo(userInfo);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const username = userInfo?.username;
+  const name = userInfo?.name;
+  const mainadress = userInfo?.mainadress;
+  const sideadress = userInfo?.sideadress;
+
   return (
     <View style={styles.container}>
       <View style={styles.banner_container}>
@@ -35,12 +58,20 @@ function HoemScreen({ navigation }) {
         </Swiper>
       </View>
       <ScrollView style={styles.main_container}>
-        <View style={styles.login_container}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.login_txt1}>로그인</Text>
-          </TouchableOpacity>
-          <Text style={styles.login_txt2}>해주세요.</Text>
-        </View>
+        {username ? (
+          <View style={styles.login_container}>
+            <Text style={styles.login_txt1}>{name} 님</Text>
+            <Text style={styles.login_txt2}>환영합니다.</Text>
+          </View>
+        ) : (
+          <View style={styles.login_container}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Text style={styles.login_txt1}>로그인</Text>
+            </TouchableOpacity>
+            <Text style={styles.login_txt2}>해주세요.</Text>
+          </View>
+        )}
+
         <View style={styles.remain_container}>
           <View style={styles.point_container}>
             <View style={styles.point_box}>
@@ -54,7 +85,11 @@ function HoemScreen({ navigation }) {
           </View>
           <View style={styles.btn_container}>
             <View style={styles.btn_box}>
-              <CustomButton02 buttonColor={"#FFCEaa"} title={"배달"} onPress={() => navigation.navigate("SearchShop")} />
+              <CustomButton02
+                buttonColor={"#FFCEaa"}
+                title={"배달"}
+                onPress={() => navigation.navigate("SearchShop")}
+              />
               <Text style={styles.btntxt}>배달</Text>
             </View>
             <View style={styles.btn_box}>
