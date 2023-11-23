@@ -5,13 +5,9 @@ export const ResisterCss = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
+
     },
-    tinyLogo: {
-        height: 150,
-        width: 150,
-        marginBottom: 10,
-        marginTop: 60,
-    },
+
     inputID: {
         height: 40,
         width: 300,

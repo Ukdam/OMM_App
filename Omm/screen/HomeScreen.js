@@ -14,7 +14,7 @@ function HoemScreen({ navigation }) {
   const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("http://192.168.35.2:4000/profile", {
+    fetch("http://172.20.10.2:4000/profile", {
       credentials: "include",
     })
       .then((res) => {

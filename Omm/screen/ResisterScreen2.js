@@ -1,15 +1,33 @@
 import { ResisterCss2 } from "../css/ResisterCss2";
 import React from "react";
 import { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import Logo from "../Image/logo.svg";
+import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import CustomButton from "../Component/CustomButton";
 
 function ResisterScreen2({ route, navigation }) {
-    const [Address, setAdress] = useState("");
+
+
+    const [sideAddress, setAddress] = useState("");
+
+    const mainadress = `${route.params?.address} ${route.params?.defaultAddress}`;
+
+    const { userData } = route.params;
+    const { username, password, name, tel, email } = userData;
+
+
+    const navigateToResister3 = () => {
+        const userData2 = { username, password, name, tel, email, mainadress, sideAddress };
+        navigation.navigate("Resister3", { userData2 });
+    };
+
     return (
         <View style={ResisterCss2.container}>
-            <Logo style={ResisterCss2.tinyLogo} />
+            <Image
+                source={{ uri: 'http://172.20.10.2:4000/images/logo.png' }}
+                style={{
+                    width: 150, height: 150, marginBottom: 10, marginTop: 60
+                }}
+            />
             <View style={ResisterCss2.container2}>
                 <View style={ResisterCss2.number_text}>
                     <Text style={ResisterCss2.text}>{route.params?.zonecode}</Text>
@@ -27,13 +45,13 @@ function ResisterScreen2({ route, navigation }) {
             </View>
             <TextInput style={ResisterCss2.textInput}
                 placeholder="상세 주소를 입력하세요"
-                value={Address}
-                onChange={setAdress}
+                value={sideAddress}
+                onChangeText={setAddress}
             />
             <CustomButton
                 buttonColor={'#FF50C3'}
                 title={'다음'}
-                onPress={() => navigation.navigate("Resister3")}
+                onPress={navigateToResister3}
             />
         </View>
     );

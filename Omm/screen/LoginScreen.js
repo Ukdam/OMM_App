@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { View, TextInput, Alert } from "react-native";
+import { View, TextInput, Alert, Image } from "react-native";
 import { LoginCss } from "../css/LoginCss";
 import { useState } from "react";
-import Logo from "../Image/logo.svg";
 import CustomButton from "../Component/CustomButton";
 import { UserContext } from "../contexts/UserContext";
 
@@ -18,7 +17,7 @@ function LoginScreen({ navigation }) {
     let response;
 
     try {
-      response = await fetch("http://192.168.35.2:4000/login", {
+      response = await fetch("http://172.20.10.2:4000/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
@@ -38,14 +37,20 @@ function LoginScreen({ navigation }) {
     }
   }
 
-  if (redirect) {
-    navigation.navigate("Main");
-    return null;
-  }
+  useEffect(() => {
+    if (redirect) {
+      navigation.navigate("Main");
+    }
+  }, [redirect]); // redirect 상태가 변경될 때에만 실행
 
   return (
     <View style={LoginCss.container}>
-      <Logo style={LoginCss.tinyLogo} />
+      <Image
+        source={{ uri: 'http://172.20.10.2:4000/images/logo.png' }}
+        style={{
+          width: 150, height: 150, marginBottom: 10, marginTop: 60
+        }}
+      />
       <TextInput
         style={LoginCss.inputID}
         onChangeText={setUserName}

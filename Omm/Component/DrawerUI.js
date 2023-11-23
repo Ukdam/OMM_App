@@ -95,7 +95,7 @@ function DrawerUI({ navigation }) {
   const sideadress = userInfo?.sideadress;
 
   function logout() {
-    fetch("http://192.168.35.2:4000/logout", {
+    fetch("http://172.20.10.2:4000/logout", {
       credentials: "include",
       method: "POST",
     });
