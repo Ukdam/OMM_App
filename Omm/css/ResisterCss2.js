@@ -8,7 +8,7 @@ export const ResisterCss2 = StyleSheet.create({
     },
     container2: {
         flexDirection: "row",
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
         marginBottom: 10,
     },
     tinyLogo: {
@@ -19,8 +19,8 @@ export const ResisterCss2 = StyleSheet.create({
     },
     btn: {
         backgroundColor: "#000",
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         width: 100,
         height: 50,
         borderRadius: 15,
@@ -35,8 +35,8 @@ export const ResisterCss2 = StyleSheet.create({
         width: 200,
         height: 50,
         borderRadius: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
     },
     text: {
         fontSize: 15,
@@ -46,8 +46,8 @@ export const ResisterCss2 = StyleSheet.create({
         width: 320,
         height: 50,
         borderRadius: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         marginBottom: 10,
     },
     textInput: {

@@ -8,6 +8,7 @@ import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginScreen from "../screen/LoginScreen";
 import PaymentScreen_D from "../screen/PaymentScreen_D";
+import PaymentScreen_P from "../screen/PaymentScreen_P"
 import ResisterScreen from "../screen/ResisterScreen";
 import ResisterScreen2 from "../screen/ResisterScreen2";
 import SearchAddress from "../Component/SearchAddress";
@@ -25,6 +26,8 @@ import OrderHistoryScreen from "../screen/OrderHistoryScreen";
 import HistoryDetailScreen from "../screen/HistoryDetailScreen";
 import SelectProductScreen from "../screen/SelectProductScreen";
 import TossPayment from "../Component/TossPayment";
+import P_SearchShopScreen from "../screen/P_SearchShopScreen";
+import P_SelectProductScreen from "../screen/P_SelectProductScreen";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -33,6 +36,16 @@ const StackNavigation = () => {
       <Stack.Screen
         name="Main"
         component={HoemScreen}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="P_SelectProduct"
+        component={P_SelectProductScreen}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="P_SearchShop"
+        component={P_SearchShopScreen}
         options={{ header: () => <Header /> }}
       />
       <Stack.Screen
@@ -53,6 +66,11 @@ const StackNavigation = () => {
       <Stack.Screen
         name="Payment_D"
         component={PaymentScreen_D}
+        options={{ header: () => <Header /> }}
+      />
+      <Stack.Screen
+        name="Payment_P"
+        component={PaymentScreen_P}
         options={{ header: () => <Header /> }}
       />
 

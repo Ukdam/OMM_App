@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { SelectProductCss } from "../css/SelectProductCss";
-import TapView from "../Component/TapView"
+import TapView from "../Component/P_TapView"
 
 
 function SelectProductScreen({ navigation, route }) {

@@ -13,13 +13,13 @@ export const ResisterCss3 = StyleSheet.create({
         marginTop: 60,
     },
     CollHeaderStyle: {
-        backgroundColor: '#EDEDED',
+        backgroundColor: "#EDEDED",
         width: 300,
         height: 40,
         alignItems: "center",
         borderWidth: 1,
         flexDirection: "row",
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
     },
     CollHeaderStyleText: {
         fontSize: 18,

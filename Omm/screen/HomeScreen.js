@@ -93,7 +93,11 @@ function HoemScreen({ navigation }) {
               <Text style={styles.btntxt}>배달</Text>
             </View>
             <View style={styles.btn_box}>
-              <CustomButton02 buttonColor={"#FFCEaa"} title={"포장"} />
+              <CustomButton02
+                buttonColor={"#FFCEaa"}
+                title={"포장"}
+                onPress={() => navigation.navigate("P_SearchShop")}
+              />
               <Text style={styles.btntxt}>포장</Text>
             </View>
           </View>

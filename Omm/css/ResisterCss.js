@@ -28,7 +28,7 @@ export const ResisterCss = StyleSheet.create({
         padding: 0,
         margin: 0,
         fontSize: 12,
-        alignSelf: 'flex-start',
+        alignSelf: "flex-start",
         marginLeft: 60,
     },
 });

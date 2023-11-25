@@ -7,7 +7,7 @@ import {
     StatusBar,
 } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import SwiperProduct from "../Component/SwiperProduct";
+import SwiperProduct from "./SwiperProduct";
 import JangBtnPay from './JangBtnPay';
 
 
@@ -95,7 +95,7 @@ export default class TabViewExample extends React.Component {
                         if (this.state.index < this.state.routes.length - 1) {
                             this._handleIndexChange((this.state.index + 1) % this.state.routes.length);
                         } else {
-                            this.props.navigation.navigate("Payment_D");
+                            this.props.navigation.navigate("Payment_P");
                         }
                     }} />
                 </View>

@@ -9,25 +9,25 @@ export const SwiperProductCss = StyleSheet.create({
         marginTop: "5%"
     },
     gridContainer: {
-        justifyContent: 'center',
+        justifyContent: "center",
         alignItems: "center",
     },
     gridItem: {
         flex: 1,
         height: 100,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         borderWidth: 1,
-        borderColor: 'black',
+        borderColor: "black",
         margin: 30
     },
     text: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
     buttonText: {
         fontSize: 18,
-        color: 'blue',
+        color: "blue",
         padding: 10,
         zIndex: 1,
     },
