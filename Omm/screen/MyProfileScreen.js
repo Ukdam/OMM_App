@@ -3,8 +3,25 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { mpstyles } from "../css/MyProfileCss";
 import JangBtn from "../Component/JangBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function MyProfileScreen({ navigation }) {
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  const username = userInfo?.username;
+  const pw = userInfo?.password;
+  const name = userInfo?.name;
+  const email = userInfo?.email;
+  const tel = userInfo?.tel;
+  const mainadress = userInfo?.mainadress;
+
+  const maskPassword = (pw) => {
+    const firstChar = pw.charAt(0);
+    const masked = `${firstChar}${"*".repeat(pw.length - 1)}`;
+    return masked;
+  };
+
   return (
     <View style={mpstyles.main_container}>
       <View style={mpstyles.avatar_container}>
@@ -26,7 +43,9 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("아이디 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <Text style={{ marginRight: 5, color: "darkgray" }}>
+              {username}
+            </Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}
@@ -45,7 +64,9 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("비밀번호 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>qwe***</Text>
+            <Text style={{ marginRight: 5, color: "darkgray" }}>
+              {maskPassword(pw)}
+            </Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}
@@ -64,7 +85,7 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("이름 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <Text style={{ marginRight: 5, color: "darkgray" }}>{name}</Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}
@@ -83,9 +104,7 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("이메일 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>
-              Test@test.com
-            </Text>
+            <Text style={{ marginRight: 5, color: "darkgray" }}>{email}</Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}
@@ -104,9 +123,7 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("연락처 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>
-              010-12**-56**
-            </Text>
+            <Text style={{ marginRight: 5, color: "darkgray" }}>{tel}</Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}
@@ -125,7 +142,15 @@ function MyProfileScreen({ navigation }) {
             onPress={() => navigation.push("주소 변경")}
             style={{ flexDirection: "row", marginRight: 3 }}
           >
-            <Text style={{ marginRight: 5, color: "darkgray" }}>Test</Text>
+            <Text
+              style={{
+                marginRight: 5,
+                color: "darkgray",
+                width: 200,
+              }}
+            >
+              {mainadress}
+            </Text>
             <FontAwesomeIcon
               icon={["fas", "caret-right"]}
               size={25}

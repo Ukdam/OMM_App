@@ -95,7 +95,7 @@ function DrawerUI({ navigation }) {
   const sideadress = userInfo?.sideadress;
 
   function logout() {
-    fetch("http://172.20.10.2:4000/logout", {
+    fetch("http://192.168.35.2:4000/logout", {
       credentials: "include",
       method: "POST",
     });
@@ -117,7 +117,7 @@ function DrawerUI({ navigation }) {
               <FontAwesomeIcon
                 icon={["fas", "circle-user"]}
                 size={100}
-                style={{ color: "gray" }}
+                style={{ color: "lightgray" }}
               />
               <JangBtn
                 title={"내 정보"}
@@ -126,8 +126,9 @@ function DrawerUI({ navigation }) {
               />
             </View>
             <View style={styles.profile_box}>
-              <Text style={{ fontSize: 22 }}>등급</Text>
-              <Text style={{ fontSize: 22 }}>이름</Text>
+              <Text style={{ fontSize: 22 }}>{username ? "VIP" : "등급"}</Text>
+
+              <Text style={{ fontSize: 22 }}>{username ? name : "이름"}</Text>
             </View>
           </View>
           <View style={styles.profile_container3}>
@@ -154,9 +155,11 @@ function DrawerUI({ navigation }) {
           <View style={styles.list_adressbox}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>주소</Text>
             <Text style={{ fontSize: 12, textDecorationLine: "underline" }}>
-              서울 특별시 종로구 청화대로
+              {username ? mainadress : "---- 로그인 해주세요 ----"}
             </Text>
-            <Text style={{ fontSize: 10, color: "gray" }}>자세한 주소</Text>
+            <Text style={{ fontSize: 11, color: "gray" }}>
+              {username ? sideadress : " 자세한 주소"}
+            </Text>
           </View>
           <TouchableOpacity
             style={styles.list_historybox}

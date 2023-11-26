@@ -4,6 +4,9 @@ import { LoginCss } from "../css/LoginCss";
 import { useState } from "react";
 import CustomButton from "../Component/CustomButton";
 import { UserContext } from "../contexts/UserContext";
+import { Input } from "react-native-elements";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function LoginScreen({ navigation }) {
   const [username, setUserName] = useState("");
@@ -17,7 +20,7 @@ function LoginScreen({ navigation }) {
     let response;
 
     try {
-      response = await fetch("http://172.20.10.2:4000/login", {
+      response = await fetch("http://192.168.35.2:4000/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
@@ -41,35 +44,67 @@ function LoginScreen({ navigation }) {
     if (redirect) {
       navigation.navigate("Main");
     }
-  }, [redirect]); // redirect 상태가 변경될 때에만 실행
+  }, [redirect]);
 
   return (
     <View style={LoginCss.container}>
-      <Image
-        source={{ uri: 'http://172.20.10.2:4000/images/logo.png' }}
-        style={{
-          width: 150, height: 150, marginBottom: 10, marginTop: 60
-        }}
-      />
-      <TextInput
-        style={LoginCss.inputID}
-        onChangeText={setUserName}
-        value={username}
-        placeholder="아이디"
-      />
-      <TextInput
-        style={LoginCss.inputPW}
-        onChangeText={setPassword}
-        value={password}
-        placeholder="패스워드"
-        secureTextEntry={true}
-      />
-      <CustomButton buttonColor={"#FFCE50"} title={"로그인"} onPress={login} />
-      <CustomButton
-        buttonColor={"#FF50C3"}
-        title={"회원가입"}
-        onPress={() => navigation.navigate("Resister")}
-      />
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        enableAutomaticScroll={Platform.OS === "ios"}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ flex: 1.2, alignItems: "center" }}>
+          <Image
+            source={{ uri: "http://192.168.35.2:4000/images/logo.png" }}
+            style={{
+              width: 150,
+              height: 150,
+              marginBottom: 10,
+              marginTop: 60,
+            }}
+          />
+        </View>
+
+        <View style={LoginCss.loginView01}>
+          <View style={LoginCss.loginView02}>
+            <FontAwesomeIcon icon={["fas", "user"]} size={20} color="gray" />
+          </View>
+
+          <TextInput
+            style={LoginCss.inputID}
+            onChangeText={setUserName}
+            value={username}
+            placeholder="아이디"
+          />
+        </View>
+
+        <View style={LoginCss.loginView01}>
+          <View style={LoginCss.loginView02}>
+            <FontAwesomeIcon icon={["fas", "lock"]} size={20} color="gray" />
+          </View>
+          <TextInput
+            style={LoginCss.inputPW}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="패스워드"
+            secureTextEntry={true}
+          />
+        </View>
+
+        <View style={{ flex: 1.5, marginTop: 60 }}>
+          <CustomButton
+            buttonColor={"#FFCE50"}
+            title={"로그인"}
+            onPress={login}
+          />
+          <CustomButton
+            buttonColor={"#FF50C3"}
+            title={"회원가입"}
+            onPress={() => navigation.navigate("Resister")}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 }

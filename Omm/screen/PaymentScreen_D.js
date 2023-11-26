@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -6,14 +6,24 @@ import {
   SafeAreaView,
   Button,
   TextInput,
+  Alert,
 } from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
 import { CheckBox } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
 import TossPayment from "../Component/TossPayment";
+import { UserContext } from "../contexts/UserContext";
 
 function PaymentScreen_D({ navigation }) {
+  // 회원 정보
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  const mainadress = userInfo?.mainadress;
+  const sideadress = userInfo?.sideadress;
+
+  const userId = userInfo?.id;
+
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [radioIndex, setRadioIndex] = useState(0);
@@ -32,6 +42,75 @@ function PaymentScreen_D({ navigation }) {
 
   // textarea
   const [textAValue, setTextAValue] = useState("");
+
+  //payment api
+
+  const p_store = "원광대점";
+  const p_kind = "배달";
+  const p_quantity = 1;
+  const p_price = 1000;
+  const p_adress = mainadress + " " + sideadress;
+  const p_ingredient = "Sangchu x 10";
+
+  async function Payment(e) {
+    e.preventDefault();
+    let response;
+
+    const requsetToSave = [];
+    if (check1) {
+      requsetToSave.push("문 앞에 놓고 문자주세요");
+    }
+    if (check2) {
+      requsetToSave.push("일회용 수저, 포크가 필요해요");
+    }
+    if (!selectValue === "직접 입력") {
+      requsetToSave.push(selectItems);
+    } else {
+      requsetToSave.push(textAValue);
+    }
+
+    const p_request = requsetToSave.join("_");
+
+    let p_payment;
+    switch (radioIndex) {
+      case 0:
+        p_payment = "카드 결제";
+        break;
+      case 1:
+        p_payment = "현장 결제";
+        break;
+    }
+
+    const p_userId = userId;
+
+    try {
+      response = await fetch("http://192.168.35.2:4000/payment", {
+        method: "POST",
+        body: JSON.stringify({
+          p_store,
+          p_kind,
+          p_quantity,
+          p_price,
+          p_adress,
+          p_request,
+          p_ingredient,
+          p_payment,
+          p_userId,
+        }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
+
+    if (response && response.ok) {
+      Alert.alert("결제 성공");
+    } else {
+      Alert.alert("결제 실패");
+    }
+  }
+
   return (
     <>
       <ScrollView
@@ -58,9 +137,9 @@ function PaymentScreen_D({ navigation }) {
               textDecorationLine: "underline",
             }}
           >
-            익산대로 11번길 14
+            {mainadress}
           </Text>
-          <Text style={{ fontSize: 12 }}>101동 101호</Text>
+          <Text style={{ fontSize: 12 }}>{sideadress}</Text>
         </View>
         <View style={pstyles.cart_container}>
           <View style={pstyles.cart_menubox}>
@@ -233,7 +312,8 @@ function PaymentScreen_D({ navigation }) {
       <View style={pstyles.btn_container}>
         <JangBtnPay
           title={"결제 하기"}
-          onPress={() => navigation.push("토스")}
+          onPress={Payment}
+          // onPress={() => navigation.push("토스")}
         />
       </View>
     </>
