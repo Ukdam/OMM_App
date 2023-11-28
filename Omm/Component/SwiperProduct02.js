@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { SwiperProductCss } from "../css/SwiperProductcss";
 import { Grid, Col, Row } from "react-native-easy-grid";
@@ -7,23 +7,20 @@ import { ScrollView } from "react-native-gesture-handler";
 import JangBtnPay from "./JangBtnPay";
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
 
-function SwiperProduct() {
+function SwiperProduct02() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
 
   const [products, setProducts] = useState([
-    { name: "채소 1", price: 1000, count: 0 },
-    { name: "채소 2", price: 2000, count: 0 },
-    { name: "채소 3", price: 100, count: 0 },
-    { name: "채소 4", price: 200, count: 0 },
-    { name: "채소 5", price: 500, count: 0 },
-    { name: "채소 6", price: 1500, count: 0 },
-    { name: "채소 7", price: 200, count: 0 },
-    { name: "채소 8", price: 500, count: 0 },
-    { name: "채소 9", price: 1500, count: 0 },
+    { name: "고기 1", price: 1000, count: 0 },
+    { name: "고기 2", price: 2000, count: 0 },
+    { name: "고기 3", price: 100, count: 0 },
+    { name: "고기 4", price: 200, count: 0 },
+    { name: "고기 5", price: 500, count: 0 },
+    { name: "고기 6", price: 1500, count: 0 },
+    { name: "고기 7", price: 200, count: 0 },
+    { name: "고기 8", price: 500, count: 0 },
+    { name: "고기 9", price: 1500, count: 0 },
   ]);
 
   const handleClick = (index) => {
@@ -44,21 +41,21 @@ function SwiperProduct() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newMeatState = [...prevState.meat];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newMeatState.findIndex(
             (product) => product.name === changedProduct.name
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newMeatState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newMeatState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          meat: newMeatState,
         };
       });
     }
@@ -69,6 +66,7 @@ function SwiperProduct() {
 
     prevProductsRef.current = products;
   }, [products]);
+
   return (
     <>
       <ScrollView style={SwiperProductCss.ViewContainer}>
@@ -110,4 +108,4 @@ function SwiperProduct() {
   );
 }
 
-export default SwiperProduct;
+export default SwiperProduct02;

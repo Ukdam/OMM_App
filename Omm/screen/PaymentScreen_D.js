@@ -14,8 +14,42 @@ import { CheckBox } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
 import TossPayment from "../Component/TossPayment";
 import { UserContext } from "../contexts/UserContext";
+import { ProductContext } from "../contexts/ProductContext";
+import { useEffect } from "react";
 
 function PaymentScreen_D({ navigation }) {
+  // 메뉴 재료 정보
+  const { productInfo } = useContext(ProductContext);
+  const [productList, setProductList] = useState("");
+  const [addPrice, setAddPrice] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  useEffect(() => {
+    const list = Object.values(productInfo).reduce((list, products) => {
+      const productStr = products
+        .map((product) => `${product.name} x ${product.count}`)
+        .join(", ");
+      return list ? `${list}, ${productStr}` : productStr;
+    }, "");
+
+    setProductList(list);
+
+    const total = Object.values(productInfo).reduce((total, products) => {
+      return (
+        total +
+        products.reduce(
+          (total, product) => total + product.price * product.count,
+          0
+        )
+      );
+    }, 0);
+    setGrandTotal(total);
+  }, [productInfo]);
+
+  useEffect(() => {
+    const additionalPrice = grandTotal < 12000 ? 12000 - grandTotal : 0;
+    setAddPrice(additionalPrice);
+  }, [grandTotal]);
   // 회원 정보
   const { setUserInfo, userInfo } = useContext(UserContext);
 
@@ -144,6 +178,26 @@ function PaymentScreen_D({ navigation }) {
         <View style={pstyles.cart_container}>
           <View style={pstyles.cart_menubox}>
             <Text>메뉴</Text>
+            {Object.entries(productInfo).map(([category, products]) => {
+              const totalPrice = products.reduce(
+                (total, product) => total + product.price * product.count,
+                0
+              );
+              return (
+                <View key={category}>
+                  {products.map((product, index) => (
+                    <View key={index} style={{ flexDirection: "row" }}>
+                      <Text>{`${product.name}`}</Text>
+                      <Text>{`x ${product.count}`}</Text>
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
+            <Text>--------------------------</Text>
+            <Text>{`Product List: ${productList}`}</Text>
+            <Text>--------------------------</Text>
+            <Text>{`Grand Total: ${grandTotal}`}</Text>
           </View>
           <View style={pstyles.cart_addmenu}>
             <Text
@@ -277,15 +331,15 @@ function PaymentScreen_D({ navigation }) {
           <View style={pstyles.amount_contentbox}>
             <View style={pstyles.amount_contentflex}>
               <Text>상품 금액</Text>
-              <Text>0 원</Text>
+              <Text>{grandTotal} 원</Text>
             </View>
             <View style={pstyles.amount_contentflex}>
               <Text>추가 금액</Text>
-              <Text>0 원</Text>
+              <Text>{addPrice} 원</Text>
             </View>
             <View style={pstyles.amount_contentflex}>
               <Text>배달 요금</Text>
-              <Text>0 원</Text>
+              <Text>2000 원</Text>
             </View>
           </View>
           <View style={pstyles.amount_amoutbox}>
@@ -303,7 +357,7 @@ function PaymentScreen_D({ navigation }) {
                 fontWeight: "bold",
               }}
             >
-              0 원
+              {grandTotal + 2000 + addPrice} 원
             </Text>
           </View>
         </View>

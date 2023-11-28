@@ -10,15 +10,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./navigation/DrawerNavigtion";
 
 import { UserContextProvider } from "./contexts/UserContext";
+import { ProductContextProvider } from "./contexts/ProductContext";
 
 library.add(fas, far);
 
 export default function App() {
   return (
     <UserContextProvider>
-      <NavigationContainer>
-        <DrawerNavigation />
-      </NavigationContainer>
+      <ProductContextProvider>
+        <NavigationContainer>
+          <DrawerNavigation />
+        </NavigationContainer>
+      </ProductContextProvider>
     </UserContextProvider>
   );
 }

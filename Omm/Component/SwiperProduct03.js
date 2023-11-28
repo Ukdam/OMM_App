@@ -11,19 +11,19 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 
-function SwiperProduct() {
+function SwiperProduct03() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
 
   const [products, setProducts] = useState([
-    { name: "채소 1", price: 1000, count: 0 },
-    { name: "채소 2", price: 2000, count: 0 },
-    { name: "채소 3", price: 100, count: 0 },
-    { name: "채소 4", price: 200, count: 0 },
-    { name: "채소 5", price: 500, count: 0 },
-    { name: "채소 6", price: 1500, count: 0 },
-    { name: "채소 7", price: 200, count: 0 },
-    { name: "채소 8", price: 500, count: 0 },
-    { name: "채소 9", price: 1500, count: 0 },
+    { name: "밥/면 1", price: 1000, count: 0 },
+    { name: "밥/면 2", price: 2000, count: 0 },
+    { name: "밥/면 3", price: 100, count: 0 },
+    { name: "밥/면 4", price: 200, count: 0 },
+    { name: "밥/면 5", price: 500, count: 0 },
+    { name: "밥/면 6", price: 1500, count: 0 },
+    { name: "밥/면 7", price: 200, count: 0 },
+    { name: "밥/면 8", price: 500, count: 0 },
+    { name: "밥/면 9", price: 1500, count: 0 },
   ]);
 
   const handleClick = (index) => {
@@ -44,21 +44,21 @@ function SwiperProduct() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newRiceState = [...prevState.rice];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newRiceState.findIndex(
             (product) => product.name === changedProduct.name
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newRiceState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newRiceState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          rice: newRiceState,
         };
       });
     }
@@ -110,4 +110,4 @@ function SwiperProduct() {
   );
 }
 
-export default SwiperProduct;
+export default SwiperProduct03;

@@ -5,12 +5,41 @@ import { hstyles } from "../css/headercss";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { FontAwesome } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
-function Header({ }) {
+function Header({}) {
   const navigation = useNavigation();
+  const { productInfo, setProductInfo } = useContext(ProductContext);
+
+  function TestFunc() {
+    console.log("------------------------");
+    Object.entries(productInfo).forEach(([category, products]) => {
+      console.log(`Category: ${category}`);
+
+      products.forEach((product, index) => {
+        console.log(
+          ` >>> ${product.name} : 개수 ${product.count} 가격 ${product.price}`
+        );
+      });
+    });
+    // Object.entries(productInfo).forEach(([category, products]) => {
+    //   console.log(`Category: ${category}`);
+    //   products.forEach((product, index) => {
+    //     console.log(`Product ${index + 1}: ${JSON.stringify(product)}`);
+    //   });
+    // });
+    console.log("------------------------");
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 0, marginBottom: Platform.OS === 'ios' ? 20 : 55 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: 0,
+        marginBottom: Platform.OS === "ios" ? 20 : 55,
+      }}
+    >
       <View style={hstyles.container}>
         <TouchableOpacity
           onPress={() => {
@@ -29,12 +58,9 @@ function Header({ }) {
           <Text style={hstyles.titletxt}>OMM</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Payment_D")}
-          style={hstyles.rightContainer}
-        >
+        <TouchableOpacity onPress={TestFunc} style={hstyles.rightContainer}>
           <Text style={hstyles.righttxt}>
-            <FontAwesomeIcon icon={["fas", "cart-shopping"]} size={25} />
+            <FontAwesomeIcon icon={["fas", "bell"]} size={25} />
           </Text>
         </TouchableOpacity>
       </View>

@@ -11,19 +11,19 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 
-function SwiperProduct() {
+function SwiperProduct04() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
 
   const [products, setProducts] = useState([
-    { name: "채소 1", price: 1000, count: 0 },
-    { name: "채소 2", price: 2000, count: 0 },
-    { name: "채소 3", price: 100, count: 0 },
-    { name: "채소 4", price: 200, count: 0 },
-    { name: "채소 5", price: 500, count: 0 },
-    { name: "채소 6", price: 1500, count: 0 },
-    { name: "채소 7", price: 200, count: 0 },
-    { name: "채소 8", price: 500, count: 0 },
-    { name: "채소 9", price: 1500, count: 0 },
+    { name: "소스 1", price: 1000, count: 0 },
+    { name: "소스 2", price: 2000, count: 0 },
+    { name: "소스 3", price: 100, count: 0 },
+    { name: "소스 4", price: 200, count: 0 },
+    { name: "소스 5", price: 500, count: 0 },
+    { name: "소스 6", price: 1500, count: 0 },
+    { name: "소스 7", price: 200, count: 0 },
+    { name: "소스 8", price: 500, count: 0 },
+    { name: "소스 9", price: 1500, count: 0 },
   ]);
 
   const handleClick = (index) => {
@@ -44,21 +44,21 @@ function SwiperProduct() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newSauceState = [...prevState.sauce];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newSauceState.findIndex(
             (product) => product.name === changedProduct.name
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newSauceState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newSauceState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          sauce: newSauceState,
         };
       });
     }
@@ -110,4 +110,4 @@ function SwiperProduct() {
   );
 }
 
-export default SwiperProduct;
+export default SwiperProduct04;
