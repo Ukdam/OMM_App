@@ -1,44 +1,38 @@
-import React from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { SwiperProductCss } from "../css/SwiperProductcss";
 import { Grid, Col, Row } from "react-native-easy-grid";
-import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
-import JangBtnPay from "./JangBtnPay";
-import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { SwiperProductCss } from "../css/SwiperProductcss";
 
 function SwiperProduct() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
+  const [products, setProducts] = useState([]);
+  const prevProductsRef = useRef([]);
 
-  const [products, setProducts] = useState([
-    { name: "채소 1", price: 1000, count: 0 },
-    { name: "채소 2", price: 2000, count: 0 },
-    { name: "채소 3", price: 100, count: 0 },
-    { name: "채소 4", price: 200, count: 0 },
-    { name: "채소 5", price: 500, count: 0 },
-    { name: "채소 6", price: 1500, count: 0 },
-    { name: "채소 7", price: 200, count: 0 },
-    { name: "채소 8", price: 500, count: 0 },
-    { name: "채소 9", price: 1500, count: 0 },
-  ]);
+  useEffect(() => {
+    fetch('http://172.20.10.2:4000/admin/Productdata')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data);
+        prevProductsRef.current = data;
+      });
+  }, []);
 
   const handleClick = (index) => {
     setProducts(
       products.map((product, i) =>
-        i === index ? { ...product, count: product.count + 1 } : product
+        i === index ? { ...product, count: (product.count || 0) + 1 } : product
       )
     );
   };
 
-  const prevProductsRef = useRef(products);
-
   useEffect(() => {
     const changedProducts = products.filter((product, i) => {
       const prevProduct = prevProductsRef.current[i];
+      if (!prevProduct) {
+        return false;
+      }
       return prevProduct.count !== product.count;
     });
 
@@ -69,6 +63,7 @@ function SwiperProduct() {
 
     prevProductsRef.current = products;
   }, [products]);
+
   return (
     <>
       <ScrollView style={SwiperProductCss.ViewContainer}>

@@ -118,7 +118,7 @@ function PaymentScreen_D({ navigation }) {
     const p_userId = userId;
 
     try {
-      response = await fetch("http://192.168.35.2:4000/payment", {
+      response = await fetch("http://172.20.10.2:4000/payment", {
         method: "POST",
         body: JSON.stringify({
           p_store,
@@ -367,7 +367,7 @@ function PaymentScreen_D({ navigation }) {
         <JangBtnPay
           title={"결제 하기"}
           onPress={Payment}
-          // onPress={() => navigation.push("토스")}
+        // onPress={() => navigation.push("토스")}
         />
       </View>
     </>

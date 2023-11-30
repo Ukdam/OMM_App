@@ -28,7 +28,7 @@ function ResisterScreen2({ route, navigation }) {
   return (
     <View style={ResisterCss2.container}>
       <Image
-        source={{ uri: "http://192.168.35.2:4000/images/logo.png" }}
+        source={{ uri: "http://172.20.10.2:4000/images/logo.png" }}
         style={{
           width: 150,
           height: 150,
