@@ -35,7 +35,7 @@ function ResisterScreen3({ route, navigation }) {
     let response;
 
     try {
-      response = await fetch("http://172.20.10.2:4000/register", {
+      response = await fetch("http://192.168.37.8:4000/register", {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -75,7 +75,7 @@ function ResisterScreen3({ route, navigation }) {
   return (
     <View style={ResisterCss3.container}>
       <Image
-        source={{ uri: "http://172.20.10.2:4000/images/logo.png" }}
+        source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
         style={{
           width: 150,
           height: 150,

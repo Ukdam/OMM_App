@@ -27,7 +27,7 @@ function PaymentScreen_D({ navigation }) {
   useEffect(() => {
     const list = Object.values(productInfo).reduce((list, products) => {
       const productStr = products
-        .map((product) => `${product.name} x ${product.count}`)
+        .map((product) => `${product.ProductName} x ${product.count}`)
         .join(", ");
       return list ? `${list}, ${productStr}` : productStr;
     }, "");
@@ -38,7 +38,7 @@ function PaymentScreen_D({ navigation }) {
       return (
         total +
         products.reduce(
-          (total, product) => total + product.price * product.count,
+          (total, product) => total + product.Price * product.count,
           0
         )
       );
@@ -118,7 +118,7 @@ function PaymentScreen_D({ navigation }) {
     const p_userId = userId;
 
     try {
-      response = await fetch("http://172.20.10.2:4000/payment", {
+      response = await fetch("http://192.168.37.8:4000/payment", {
         method: "POST",
         body: JSON.stringify({
           p_store,
@@ -180,14 +180,14 @@ function PaymentScreen_D({ navigation }) {
             <Text>메뉴</Text>
             {Object.entries(productInfo).map(([category, products]) => {
               const totalPrice = products.reduce(
-                (total, product) => total + product.price * product.count,
+                (total, product) => total + product.Price * product.count,
                 0
               );
               return (
                 <View key={category}>
                   {products.map((product, index) => (
                     <View key={index} style={{ flexDirection: "row" }}>
-                      <Text>{`${product.name}`}</Text>
+                      <Text>{`${product.Productname}`}</Text>
                       <Text>{`x ${product.count}`}</Text>
                     </View>
                   ))}
@@ -367,7 +367,7 @@ function PaymentScreen_D({ navigation }) {
         <JangBtnPay
           title={"결제 하기"}
           onPress={Payment}
-        // onPress={() => navigation.push("토스")}
+          // onPress={() => navigation.push("토스")}
         />
       </View>
     </>

@@ -11,11 +11,14 @@ function SwiperProduct() {
   const prevProductsRef = useRef([]);
 
   useEffect(() => {
-    fetch('http://172.20.10.2:4000/admin/Productdata')
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data);
-        prevProductsRef.current = data;
+    fetch("http://192.168.37.8:4000/admin/Productdata")
+      .then((response) => response.json())
+      .then((data) => {
+        const vegetableProducts = data.filter(
+          (product) => product.category === "채소"
+        );
+        setProducts(vegetableProducts);
+        prevProductsRef.current = vegetableProducts;
       });
   }, []);
 
@@ -41,7 +44,7 @@ function SwiperProduct() {
         const newVegetableState = [...prevState.vegetable];
         changedProducts.forEach((changedProduct) => {
           const existingProductIndex = newVegetableState.findIndex(
-            (product) => product.name === changedProduct.name
+            (product) => product.ProductName === changedProduct.ProductName
           );
 
           if (existingProductIndex !== -1) {
@@ -77,7 +80,9 @@ function SwiperProduct() {
                       style={SwiperProductCss.gridItem}
                       onPress={() => handleClick(index)}
                     >
-                      <Text style={SwiperProductCss.text}>{product.name}</Text>
+                      <Text style={SwiperProductCss.text}>
+                        {product.ProductName}
+                      </Text>
                     </TouchableOpacity>
                   </Col>
 
@@ -88,7 +93,7 @@ function SwiperProduct() {
                         onPress={() => handleClick(index + 1)}
                       >
                         <Text style={SwiperProductCss.text}>
-                          {products[index + 1].name}
+                          {products[index + 1].ProductName}
                         </Text>
                       </TouchableOpacity>
                     </Col>

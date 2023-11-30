@@ -19,7 +19,7 @@ function Header({}) {
 
       products.forEach((product, index) => {
         console.log(
-          ` >>> ${product.name} : 개수 ${product.count} 가격 ${product.price}`
+          ` >>> ${product.ProductName} : 개수 ${product.count} 가격 ${product.Price}`
         );
       });
     });

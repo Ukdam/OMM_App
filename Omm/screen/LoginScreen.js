@@ -20,7 +20,7 @@ function LoginScreen({ navigation }) {
     let response;
 
     try {
-      response = await fetch("http://172.20.10.2:4000/login", {
+      response = await fetch("http://192.168.37.8:4000/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ function LoginScreen({ navigation }) {
       >
         <View style={{ flex: 1.2, alignItems: "center" }}>
           <Image
-            source={{ uri: "http://172.20.10.2:4000/images/logo.png" }}
+            source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
             style={{
               width: 150,
               height: 150,
