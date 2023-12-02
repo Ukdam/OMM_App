@@ -4,14 +4,17 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { ScrollView } from "react-native-gesture-handler";
 import { ProductContext } from "../contexts/ProductContext";
 import { SwiperProductCss } from "../css/SwiperProductcss";
+import { IPContext } from "../contexts/IPContext";
 
 function SwiperProduct() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
   const [products, setProducts] = useState([]);
   const prevProductsRef = useRef([]);
 
+  const { myIP } = useContext(IPContext);
+
   useEffect(() => {
-    fetch("http://172.20.10.2:4000/admin/Productdata")
+    fetch(`http://${myIP}:4000/admin/Productdata`)
       .then((response) => response.json())
       .then((data) => {
         const vegetableProducts = data.filter(

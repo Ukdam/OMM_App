@@ -13,6 +13,7 @@ import JangBtn from "./JangBtn";
 import { color } from "react-native-elements/dist/helpers";
 import { UserContext } from "../contexts/UserContext";
 import { DrawerActions } from "@react-navigation/native";
+import { IPContext } from "../contexts/IPContext";
 
 function DrawerUI({ navigation }) {
   const styles = StyleSheet.create({
@@ -88,6 +89,7 @@ function DrawerUI({ navigation }) {
   });
 
   const { setUserInfo, userInfo } = useContext(UserContext);
+  const { myIP } = useContext(IPContext);
 
   const username = userInfo?.username;
   const name = userInfo?.name;
@@ -95,7 +97,7 @@ function DrawerUI({ navigation }) {
   const sideadress = userInfo?.sideadress;
 
   function logout() {
-    fetch("http://192.168.35.2:4000/logout", {
+    fetch(`http://${myIP}:4000/logout`, {
       credentials: "include",
       method: "POST",
     });

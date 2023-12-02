@@ -10,21 +10,24 @@ import { ProductContext } from "../contexts/ProductContext";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { IPContext } from "../contexts/IPContext";
 
 function SwiperProduct05() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
   const [products, setProducts] = useState([]);
   const prevProductsRef = useRef([]);
 
+  const { myIP } = useContext(IPContext);
+
   useEffect(() => {
-    fetch("http://172.20.10.2:4000/admin/Productdata")
+    fetch(`http://${myIP}:4000/admin/Productdata`)
       .then((response) => response.json())
       .then((data) => {
-        const vegetableProducts = data.filter(
+        const etcProducts = data.filter(
           (product) => product.category === "추가"
         );
-        setProducts(vegetableProducts);
-        prevProductsRef.current = vegetableProducts;
+        setProducts(etcProducts);
+        prevProductsRef.current = etcProducts;
       });
   }, []);
 
@@ -47,21 +50,21 @@ function SwiperProduct05() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newEtcState = [...prevState.etc];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newEtcState.findIndex(
             (product) => product.ProductName === changedProduct.ProductName
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newEtcState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newEtcState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          etc: newEtcState,
         };
       });
     }

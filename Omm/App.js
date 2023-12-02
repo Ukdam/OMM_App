@@ -11,17 +11,20 @@ import DrawerNavigation from "./navigation/DrawerNavigtion";
 
 import { UserContextProvider } from "./contexts/UserContext";
 import { ProductContextProvider } from "./contexts/ProductContext";
+import { IPContextProvider } from "./contexts/IPContext";
 
 library.add(fas, far);
 
 export default function App() {
   return (
-    <UserContextProvider>
-      <ProductContextProvider>
-        <NavigationContainer>
-          <DrawerNavigation />
-        </NavigationContainer>
-      </ProductContextProvider>
-    </UserContextProvider>
+    <IPContextProvider>
+      <UserContextProvider>
+        <ProductContextProvider>
+          <NavigationContainer>
+            <DrawerNavigation />
+          </NavigationContainer>
+        </ProductContextProvider>
+      </UserContextProvider>
+    </IPContextProvider>
   );
 }

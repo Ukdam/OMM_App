@@ -16,8 +16,10 @@ import TossPayment from "../Component/TossPayment";
 import { UserContext } from "../contexts/UserContext";
 import { ProductContext } from "../contexts/ProductContext";
 import { useEffect } from "react";
+import { IPContext } from "../contexts/IPContext";
 
 function PaymentScreen_D({ navigation }) {
+  const { myIP } = useContext(IPContext);
   // 메뉴 재료 정보
   const { productInfo } = useContext(ProductContext);
   const [productList, setProductList] = useState("");
@@ -82,9 +84,9 @@ function PaymentScreen_D({ navigation }) {
   const p_store = "원광대점";
   const p_kind = "배달";
   const p_quantity = 1;
-  const p_price = 1000;
+  const p_price = grandTotal + 2000 + addPrice;
   const p_adress = mainadress + " " + sideadress;
-  const p_ingredient = "Sangchu x 10";
+  const p_ingredient = productList;
 
   async function Payment(e) {
     e.preventDefault();
@@ -118,7 +120,7 @@ function PaymentScreen_D({ navigation }) {
     const p_userId = userId;
 
     try {
-      response = await fetch("http://192.168.37.8:4000/payment", {
+      response = await fetch(`http://${myIP}:4000/payment`, {
         method: "POST",
         body: JSON.stringify({
           p_store,
@@ -129,6 +131,7 @@ function PaymentScreen_D({ navigation }) {
           p_request,
           p_ingredient,
           p_payment,
+          p_state: "미 접수",
           p_userId,
         }),
         headers: { "Content-Type": "application/json" },
@@ -187,7 +190,7 @@ function PaymentScreen_D({ navigation }) {
                 <View key={category}>
                   {products.map((product, index) => (
                     <View key={index} style={{ flexDirection: "row" }}>
-                      <Text>{`${product.Productname}`}</Text>
+                      <Text>{`${product.ProductName}`}</Text>
                       <Text>{`x ${product.count}`}</Text>
                     </View>
                   ))}
@@ -207,7 +210,7 @@ function PaymentScreen_D({ navigation }) {
                 color: "#3182ce",
               }}
             >
-              메뉴 추가하기
+              메뉴 변경하기
             </Text>
           </View>
         </View>
@@ -339,7 +342,7 @@ function PaymentScreen_D({ navigation }) {
             </View>
             <View style={pstyles.amount_contentflex}>
               <Text>배달 요금</Text>
-              <Text>2000 원</Text>
+              <Text>0 원</Text>
             </View>
           </View>
           <View style={pstyles.amount_amoutbox}>
@@ -357,7 +360,7 @@ function PaymentScreen_D({ navigation }) {
                 fontWeight: "bold",
               }}
             >
-              {grandTotal + 2000 + addPrice} 원
+              {grandTotal + 0 + addPrice} 원
             </Text>
           </View>
         </View>

@@ -7,14 +7,17 @@ import { ScrollView } from "react-native-gesture-handler";
 import JangBtnPay from "./JangBtnPay";
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
+import { IPContext } from "../contexts/IPContext";
 
 function SwiperProduct02() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
   const [products, setProducts] = useState([]);
   const prevProductsRef = useRef([]);
 
+  const { myIP } = useContext(IPContext);
+
   useEffect(() => {
-    fetch("http://172.20.10.2:4000/admin/Productdata")
+    fetch(`http://${myIP}:4000/admin/Productdata`)
       .then((response) => response.json())
       .then((data) => {
         const meatProducts = data.filter(
@@ -44,21 +47,21 @@ function SwiperProduct02() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newMeatState = [...prevState.meat];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newMeatState.findIndex(
             (product) => product.ProductName === changedProduct.ProductName
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newMeatState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newMeatState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          meat: newMeatState,
         };
       });
     }

@@ -14,8 +14,11 @@ import CustomButton from "../Component/CustomButton";
 import { useEffect } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { IPContext } from "../contexts/IPContext";
 
 function ResisterScreen({ navigation }) {
+  const { myIP } = useContext(IPContext);
+
   const [username, onChangeID] = useState("");
   const [password, onChangePW] = useState("");
   const [name, onChangeName] = useState("");
@@ -51,7 +54,7 @@ function ResisterScreen({ navigation }) {
       >
         <View style={{ alignItems: "center" }}>
           <Image
-            source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
+            source={{ uri: `http://${myIP}:4000/images/logo.png` }}
             style={{
               width: 150,
               height: 150,

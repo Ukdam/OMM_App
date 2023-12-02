@@ -18,8 +18,11 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import CustomButton from "../Component/CustomButton";
 import { UserContext } from "../contexts/UserContext";
+import { IPContext } from "../contexts/IPContext";
 
 function ResisterScreen3({ route, navigation }) {
+  const { myIP } = useContext(IPContext);
+
   const [Check1, setCheck1] = useState(false);
   const [Check2, setCheck2] = useState(false);
   const [Check3, setCheck3] = useState(false);
@@ -35,7 +38,7 @@ function ResisterScreen3({ route, navigation }) {
     let response;
 
     try {
-      response = await fetch("http://192.168.37.8:4000/register", {
+      response = await fetch(`http://${myIP}:4000/register`, {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -75,7 +78,7 @@ function ResisterScreen3({ route, navigation }) {
   return (
     <View style={ResisterCss3.container}>
       <Image
-        source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
+        source={{ uri: `http://${myIP}:4000/images/logo.png` }}
         style={{
           width: 150,
           height: 150,

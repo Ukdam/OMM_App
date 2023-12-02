@@ -3,8 +3,10 @@ import React from "react";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import CustomButton from "../Component/CustomButton";
+import { IPContext } from "../contexts/IPContext";
 
 function ResisterScreen2({ route, navigation }) {
+  const { myIP } = useContext(IPContext);
   const [sideadress, setAdress] = useState("");
 
   const mainadress = `${route.params?.address} ${route.params?.defaultAddress}`;
@@ -28,7 +30,7 @@ function ResisterScreen2({ route, navigation }) {
   return (
     <View style={ResisterCss2.container}>
       <Image
-        source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
+        source={{ uri: `http://${myIP}:4000/images/logo.png` }}
         style={{
           width: 150,
           height: 150,

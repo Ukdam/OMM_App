@@ -10,21 +10,24 @@ import { ProductContext } from "../contexts/ProductContext";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { IPContext } from "../contexts/IPContext";
 
 function SwiperProduct03() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
   const [products, setProducts] = useState([]);
   const prevProductsRef = useRef([]);
 
+  const { myIP } = useContext(IPContext);
+
   useEffect(() => {
-    fetch("http://172.20.10.2:4000/admin/Productdata")
+    fetch(`http://${myIP}:4000/admin/Productdata`)
       .then((response) => response.json())
       .then((data) => {
-        const vegetableProducts = data.filter(
+        const riceProducts = data.filter(
           (product) => product.category === "밥/면"
         );
-        setProducts(vegetableProducts);
-        prevProductsRef.current = vegetableProducts;
+        setProducts(riceProducts);
+        prevProductsRef.current = riceProducts;
       });
   }, []);
 
@@ -47,21 +50,21 @@ function SwiperProduct03() {
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newVegetableState = [...prevState.vegetable];
+        const newRiceState = [...prevState.rice];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newVegetableState.findIndex(
+          const existingProductIndex = newRiceState.findIndex(
             (product) => product.ProductName === changedProduct.ProductName
           );
 
           if (existingProductIndex !== -1) {
-            newVegetableState[existingProductIndex] = changedProduct;
+            newRiceState[existingProductIndex] = changedProduct;
           } else {
-            newVegetableState.push(changedProduct);
+            newRiceState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          vegetable: newVegetableState,
+          rice: newRiceState,
         };
       });
     }

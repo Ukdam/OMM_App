@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 import { Input } from "react-native-elements";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { IPContext } from "../contexts/IPContext";
 
 function LoginScreen({ navigation }) {
   const [username, setUserName] = useState("");
@@ -14,13 +15,14 @@ function LoginScreen({ navigation }) {
   const [redirect, setRedirect] = useState(false);
 
   const { setUserInfo } = useContext(UserContext);
+  const { myIP } = useContext(IPContext);
 
   async function login(e) {
     e.preventDefault();
     let response;
 
     try {
-      response = await fetch("http://192.168.37.8:4000/login", {
+      response = await fetch(`http://${myIP}:4000/login`, {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
@@ -56,7 +58,7 @@ function LoginScreen({ navigation }) {
       >
         <View style={{ flex: 1.2, alignItems: "center" }}>
           <Image
-            source={{ uri: "http://192.168.37.8:4000/images/logo.png" }}
+            source={{ uri: `http://${myIP}:4000/images/logo.png` }}
             style={{
               width: 150,
               height: 150,

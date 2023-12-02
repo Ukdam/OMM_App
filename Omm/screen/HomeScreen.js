@@ -9,12 +9,14 @@ import CustomButton02 from "../Component/CustomButton02";
 import ZzimCard from "../Component/ZzimCard";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import { IPContext } from "../contexts/IPContext";
 
 function HoemScreen({ navigation }) {
   const { setUserInfo, userInfo } = useContext(UserContext);
+  const { myIP } = useContext(IPContext);
 
   useEffect(() => {
-    fetch("http://192.168.37.8:4000/profile", {
+    fetch(`http://${myIP}:4000/profile`, {
       credentials: "include",
     })
       .then((res) => {
