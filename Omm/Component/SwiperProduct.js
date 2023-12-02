@@ -11,7 +11,7 @@ function SwiperProduct() {
   const prevProductsRef = useRef([]);
 
   useEffect(() => {
-    fetch("http://192.168.37.8:4000/admin/Productdata")
+    fetch("http://172.20.10.2:4000/admin/Productdata")
       .then((response) => response.json())
       .then((data) => {
         const vegetableProducts = data.filter(

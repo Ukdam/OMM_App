@@ -10,52 +10,55 @@ import { ProductContext } from "../contexts/ProductContext";
 
 function SwiperProduct02() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
+  const [products, setProducts] = useState([]);
+  const prevProductsRef = useRef([]);
 
-  const [products, setProducts] = useState([
-    { name: "고기 1", price: 1000, count: 0 },
-    { name: "고기 2", price: 2000, count: 0 },
-    { name: "고기 3", price: 100, count: 0 },
-    { name: "고기 4", price: 200, count: 0 },
-    { name: "고기 5", price: 500, count: 0 },
-    { name: "고기 6", price: 1500, count: 0 },
-    { name: "고기 7", price: 200, count: 0 },
-    { name: "고기 8", price: 500, count: 0 },
-    { name: "고기 9", price: 1500, count: 0 },
-  ]);
+  useEffect(() => {
+    fetch("http://172.20.10.2:4000/admin/Productdata")
+      .then((response) => response.json())
+      .then((data) => {
+        const meatProducts = data.filter(
+          (product) => product.category === "고기"
+        );
+        setProducts(meatProducts);
+        prevProductsRef.current = meatProducts;
+      });
+  }, []);
 
   const handleClick = (index) => {
     setProducts(
       products.map((product, i) =>
-        i === index ? { ...product, count: product.count + 1 } : product
+        i === index ? { ...product, count: (product.count || 0) + 1 } : product
       )
     );
   };
 
-  const prevProductsRef = useRef(products);
-
   useEffect(() => {
     const changedProducts = products.filter((product, i) => {
       const prevProduct = prevProductsRef.current[i];
+      if (!prevProduct) {
+        return false;
+      }
       return prevProduct.count !== product.count;
     });
 
     if (changedProducts.length > 0) {
       setProductInfo((prevState) => {
-        const newMeatState = [...prevState.meat];
+        const newVegetableState = [...prevState.vegetable];
         changedProducts.forEach((changedProduct) => {
-          const existingProductIndex = newMeatState.findIndex(
-            (product) => product.name === changedProduct.name
+          const existingProductIndex = newVegetableState.findIndex(
+            (product) => product.ProductName === changedProduct.ProductName
           );
 
           if (existingProductIndex !== -1) {
-            newMeatState[existingProductIndex] = changedProduct;
+            newVegetableState[existingProductIndex] = changedProduct;
           } else {
-            newMeatState.push(changedProduct);
+            newVegetableState.push(changedProduct);
           }
         });
         return {
           ...prevState,
-          meat: newMeatState,
+          vegetable: newVegetableState,
         };
       });
     }
@@ -80,7 +83,7 @@ function SwiperProduct02() {
                       style={SwiperProductCss.gridItem}
                       onPress={() => handleClick(index)}
                     >
-                      <Text style={SwiperProductCss.text}>{product.name}</Text>
+                      <Text style={SwiperProductCss.text}>{product.ProductName}</Text>
                     </TouchableOpacity>
                   </Col>
 
@@ -91,7 +94,7 @@ function SwiperProduct02() {
                         onPress={() => handleClick(index + 1)}
                       >
                         <Text style={SwiperProductCss.text}>
-                          {products[index + 1].name}
+                          {products[index + 1].ProductName}
                         </Text>
                       </TouchableOpacity>
                     </Col>
