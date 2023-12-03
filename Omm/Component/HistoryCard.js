@@ -2,12 +2,20 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ohstyles } from "../css/OrderHistoryCss";
 
-function HistoryCard() {
+function HistoryCard({ item }) {
+
+  const date = new Date(item.createdAt);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+
   return (
     <View style={ohstyles.card_container}>
       <View style={[ohstyles.__container, { flex: 0.7 }]}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 10 }}>
-          원광대점
+          {item.p_store}
         </Text>
         <Text
           style={{
@@ -19,23 +27,23 @@ function HistoryCard() {
             marginTop: 10,
           }}
         >
-          배달
+          {item.p_kind}
         </Text>
         <Text style={{ fontSize: 12, marginTop: 10, marginBottom: 10 }}>
-          2023-11-12 / 10:20
+          {year}-{month}-{day} / {hour}:{minutes}
         </Text>
       </View>
 
       {/*  */}
 
       <View style={[ohstyles.__container, { flex: 1 }]}>
-        <Text>재료</Text>
+        <Text>{item.p_ingredient}</Text>
       </View>
 
       {/*  */}
 
       <View style={[ohstyles.__container, { flex: 0.4 }]}>
-        <Text style={{ fontSize: 20 }}>배달 완료</Text>
+        <Text style={{ fontSize: 20 }}>{item.p_state}</Text>
       </View>
     </View>
   );

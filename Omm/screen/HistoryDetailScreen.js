@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { ohstyles } from "../css/OrderHistoryCss";
 
-function HistoryDetailScreen() {
+function HistoryDetailScreen({ route }) {
+
+  const { itemData } = route.params;
+
   return (
     <ScrollView
       style={ohstyles.detail_container}
@@ -11,7 +14,7 @@ function HistoryDetailScreen() {
       <View style={ohstyles.detail__container}>
         <View style={ohstyles.detail_box1}>
           <View style={{ marginLeft: 10 }}>
-            <Text style={{ fontSize: 26, fontWeight: "bold" }}>원광대점</Text>
+            <Text style={{ fontSize: 26, fontWeight: "bold" }}>{itemData.p_store}</Text>
             <Text
               style={{
                 fontSize: 18,
@@ -22,7 +25,7 @@ function HistoryDetailScreen() {
                 marginTop: 15,
               }}
             >
-              배달
+              {itemData.p_kind}
             </Text>
             <Text style={{ fontSize: 14, marginTop: 15, marginBottom: 15 }}>
               2023-11-12 / 10:20
@@ -33,7 +36,7 @@ function HistoryDetailScreen() {
                 fontWeight: "bold",
               }}
             >
-              카드 결제
+              {itemData.p_payment}
             </Text>
             <Text style={{ fontSize: 14, marginTop: 15 }}>
               주문 번호 : 000001
@@ -42,7 +45,7 @@ function HistoryDetailScreen() {
           <Text
             style={{
               fontSize: 24,
-              width: 70,
+              width: 100,
               textAlign: "center",
               alignSelf: "center",
               height: "auto",
@@ -52,7 +55,7 @@ function HistoryDetailScreen() {
               borderRadius: 10,
             }}
           >
-            배달 완료
+            {itemData.p_state}
           </Text>
         </View>
 
@@ -68,8 +71,7 @@ function HistoryDetailScreen() {
             요청 사항
           </Text>
           <Text>
-            문 앞에 놓고 문자주세요. 도착 후 전화주시면 직접 받으러 갈게요.
-            일회용 수저, 포크가 필요해요.
+            {itemData.p_request}
           </Text>
         </View>
 
@@ -85,14 +87,7 @@ function HistoryDetailScreen() {
           >
             재료
           </Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
-          <Text>재료재료재료재료재료재료재료재료재료재료재료</Text>
+          <Text>{itemData.p_ingredient}</Text>
         </View>
       </View>
     </ScrollView>
