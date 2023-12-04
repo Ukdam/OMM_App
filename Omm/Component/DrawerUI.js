@@ -1,5 +1,5 @@
 import { DrawerItemList } from "@react-navigation/drawer";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
   ScrollView,
@@ -14,6 +14,10 @@ import { color } from "react-native-elements/dist/helpers";
 import { UserContext } from "../contexts/UserContext";
 import { DrawerActions } from "@react-navigation/native";
 import { IPContext } from "../contexts/IPContext";
+
+import io from 'socket.io-client';
+import NotifyList from "./NotifyList";
+import NotifySection from "./NotifySection";
 
 function DrawerUI({ navigation }) {
   const styles = StyleSheet.create({
@@ -105,6 +109,36 @@ function DrawerUI({ navigation }) {
     setUserInfo(null);
   }
 
+  const [connectSocket, setConnectSocket] = useState(false);
+
+  useEffect(() => {
+    const socket = io(`ws://${myIP}:4000`, {
+      transports: ['websocket']
+    });
+  
+    socket.on('connect', () => {
+      console.log('connected to server');
+    
+      socket.on('order_received', (msg) => {
+        console.log('Order received: ' + msg);
+      });
+    });
+  
+    socket.on('connect_error', (error) => {
+      console.log('Connection Error: ' + error.message);
+    });
+    
+    socket.on('disconnect', () => {
+      console.log('disconnected from server');
+    });
+  
+    return () => {
+      socket.disconnect();
+    };
+  }, [myIP]);
+ 
+  
+
   return (
     <>
       <View style={styles.container}>
@@ -192,13 +226,17 @@ function DrawerUI({ navigation }) {
     
         */}
         <View style={styles.remain_container}>
-          {username ? (
+          <NotifySection />
+            <View style={{marginTop:20}}>
+            {username ? (
             <TouchableOpacity onPress={logout}>
               <Text style={styles.logout_btn}>로그아웃</Text>
             </TouchableOpacity>
           ) : (
             <></>
           )}
+            </View>
+          
         </View>
       </View>
     </>

@@ -62,6 +62,39 @@ export const pstyles = StyleSheet.create({
     borderColor: "#d8d9da",
   },
 
+  cart_menulayout: {
+    flex : 1,
+    flexDirection : "row",
+    width: "100%",
+    height:"auto",
+    minHeight:60,
+    display:"flex",
+    marginBottom:20,
+  },
+
+  cart_categoryText: {
+    width:"30%",
+    textAlign:"center",
+    borderRightWidth:1,
+    borderColor:"lightgray",
+    fontSize:16,
+    fontWeight:"bold",
+  },
+
+  __cart_menulayout:{
+    width:"70%",
+    flexDirection : "row",
+    marginRight : 10,
+    display:"flex",
+    justifyContent:"space-evenly",
+    flexWrap:"wrap",
+  },
+  __cart_text: {
+    height:"auto",
+    flexDirection : "row",
+  },
+
+
   //
   //   요청사항
   //

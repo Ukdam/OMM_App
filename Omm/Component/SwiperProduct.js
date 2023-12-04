@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ProductContext } from "../contexts/ProductContext";
 import { SwiperProductCss } from "../css/SwiperProductcss";
 import { IPContext } from "../contexts/IPContext";
+import { Badge } from "react-native-elements";
 
 function SwiperProduct() {
   const { productInfo, setProductInfo } = useContext(ProductContext);
@@ -12,6 +13,8 @@ function SwiperProduct() {
   const prevProductsRef = useRef([]);
 
   const { myIP } = useContext(IPContext);
+
+
 
   useEffect(() => {
     fetch(`http://${myIP}:4000/admin/Productdata`)
@@ -79,6 +82,7 @@ function SwiperProduct() {
               return (
                 <Row key={index}>
                   <Col>
+                  <Badge value={products[index].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
                     <TouchableOpacity
                       style={SwiperProductCss.gridItem}
                       onPress={() => handleClick(index)}
@@ -90,7 +94,8 @@ function SwiperProduct() {
                   </Col>
 
                   {index + 1 < products.length ? (
-                    <Col>
+                     <Col>
+                       <Badge value={products[index + 1].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
                       <TouchableOpacity
                         style={SwiperProductCss.gridItem}
                         onPress={() => handleClick(index + 1)}

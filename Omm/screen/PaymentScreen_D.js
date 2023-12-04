@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
@@ -148,6 +149,24 @@ function PaymentScreen_D({ navigation }) {
     }
   }
 
+  //카트 영역에서 카테고리가 json에 영어로 저장되어 있어서 번역
+  function translateCategory(category) {
+    switch (category) {
+      case 'vegetable':
+        return '야채';
+      case 'meat':
+        return '고기';
+      case 'rice':
+        return '밥/면';
+      case 'sauce':
+        return '소스';
+      case 'etc':
+        return '추가';
+      default:
+        return category;
+    }
+  }
+
   return (
     <>
       <ScrollView
@@ -180,29 +199,31 @@ function PaymentScreen_D({ navigation }) {
         </View>
         <View style={pstyles.cart_container}>
           <View style={pstyles.cart_menubox}>
-            <Text>메뉴</Text>
+            <Text style={{width:"100%", fontSize:18, fontWeight:"bold", height:50, lineHeight:40, marginBottom:10}}>메뉴</Text>
             {Object.entries(productInfo).map(([category, products]) => {
               const totalPrice = products.reduce(
                 (total, product) => total + product.Price * product.count,
                 0
               );
               return (
-                <View key={category}>
+                <View key={category} style={pstyles.cart_menulayout}>
+                  <Text style={pstyles.cart_categoryText}>{translateCategory(category)}</Text>
+                  <View style={pstyles.__cart_menulayout}>
                   {products.map((product, index) => (
-                    <View key={index} style={{ flexDirection: "row" }}>
-                      <Text>{`${product.ProductName}`}</Text>
-                      <Text>{`x ${product.count}`}</Text>
+                    <View key={index} style={pstyles.__cart_text}>
+                      <Text style={{fontSize:16,fontWeight:"bold"}}>{`${product.ProductName}`}</Text>
+                      <Text style={{alignSelf:"flex-end"}}>{` x${product.count}`}</Text>
                     </View>
                   ))}
                 </View>
+                  </View>
+                  
               );
             })}
-            <Text>--------------------------</Text>
-            <Text>{`Product List: ${productList}`}</Text>
-            <Text>--------------------------</Text>
-            <Text>{`Grand Total: ${grandTotal}`}</Text>
+            <Text style={{textAlign:"right", width:"100%",height:30}}>{`총 가격: ${grandTotal}`}</Text>
           </View>
           <View style={pstyles.cart_addmenu}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text
               style={{
                 fontSize: 14,
@@ -212,6 +233,7 @@ function PaymentScreen_D({ navigation }) {
             >
               메뉴 변경하기
             </Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -268,6 +290,9 @@ function PaymentScreen_D({ navigation }) {
                 borderWidth: 2,
               }}
               style={{ borderColor: "#d8d9da", borderWidth: 2 }}
+              // modal={true}
+              listMode="SCROLLVIEW"
+              dropDownDirection="BOTTOM"
             />
             {selectValue === "직접 입력" ? (
               <>
@@ -301,7 +326,11 @@ function PaymentScreen_D({ navigation }) {
             ) : null}
           </View>
         </View>
-        {/* 결제수단 */}
+
+        {/* 
+          결제수단 
+        */}
+
         <View style={pstyles.payment_container}>
           <View style={pstyles.payment_titlebox}>
             <Text

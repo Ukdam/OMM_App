@@ -28,6 +28,7 @@
     "accordion-collapse-react-native": "^1.1.1",
     "expo": "~49.0.15",
     "expo-checkbox": "~2.4.0",
+    "expo-notifications": "~0.20.1",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
@@ -48,7 +49,8 @@
     "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.0.1",
-    "react-native-web": "^0.19.9"
+    "react-native-web": "^0.19.9",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

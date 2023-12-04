@@ -12,6 +12,7 @@ import DrawerNavigation from "./navigation/DrawerNavigtion";
 import { UserContextProvider } from "./contexts/UserContext";
 import { ProductContextProvider } from "./contexts/ProductContext";
 import { IPContextProvider } from "./contexts/IPContext";
+import { NotifyContextProvider } from "./contexts/NotifyContext";
 
 library.add(fas, far);
 
@@ -20,9 +21,11 @@ export default function App() {
     <IPContextProvider>
       <UserContextProvider>
         <ProductContextProvider>
+          <NotifyContextProvider>
           <NavigationContainer>
             <DrawerNavigation />
           </NavigationContainer>
+          </NotifyContextProvider>
         </ProductContextProvider>
       </UserContextProvider>
     </IPContextProvider>
