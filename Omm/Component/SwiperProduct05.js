@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { SwiperProductCss } from "../css/SwiperProductcss";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import Swiper from "react-native-swiper";
@@ -85,24 +85,26 @@ function SwiperProduct05() {
               return (
                 <Row key={index}>
                   <Col>
-                  <Badge value={products[index].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
+                    <Badge value={products[index].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
                     <TouchableOpacity
                       style={SwiperProductCss.gridItem}
                       onPress={() => handleClick(index)}
                     >
-                      <Text style={SwiperProductCss.text}>{product.ProductName}</Text>
+                      <Image src={`http://${myIP}:4000/${product.ImageUrl}`} alt="이미지" style={{ width: "100%", height: "100%", resizeMode: "contain" }} />
+                      <Text style={SwiperProductCss.text}>{product.ProductName} / {product.Price}</Text>
                     </TouchableOpacity>
                   </Col>
 
                   {index + 1 < products.length ? (
                     <Col>
-                     <Badge value={products[index + 1].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
+                      <Badge value={products[index + 1].count} status="primary" containerStyle={{ position: 'absolute', top: 10, left: 150 }} />
                       <TouchableOpacity
                         style={SwiperProductCss.gridItem}
                         onPress={() => handleClick(index + 1)}
                       >
+                        <Image src={`http://${myIP}:4000/${products[index + 1].ImageUrl}`} alt="이미지" style={{ width: "100%", height: "100%", resizeMode: "contain" }} />
                         <Text style={SwiperProductCss.text}>
-                          {products[index + 1].ProductName}
+                          {products[index + 1].ProductName} / {products[index + 1].Price}
                         </Text>
                       </TouchableOpacity>
                     </Col>

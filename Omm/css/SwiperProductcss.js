@@ -14,15 +14,13 @@ export const SwiperProductCss = StyleSheet.create({
     },
     gridItem: {
         flex: 1,
-        height: 100,
+        height: 120,
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 1,
-        borderColor: "black",
         margin: 30
     },
     text: {
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: "bold",
     },
     buttonText: {
