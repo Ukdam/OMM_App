@@ -3,17 +3,58 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { ohstyles } from "../css/OrderHistoryCss";
 import HistoryCard from "../Component/HistoryCard";
 import { IPContext } from "../contexts/IPContext";
+import { AuthContext } from "../contexts/AuthContext";
+import { io } from "socket.io-client";
+import { useCallback } from "react";
 
 function OrderHistoryScreen({ navigation }) {
 
   const { myIP } = useContext(IPContext);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://${myIP}:4000/HistoryDetail`)
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
+  const { token } = useContext(AuthContext); 
+
+// useEffect(() => {
+//   fetch(`http://${myIP}:4000/HistoryDetail`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => setData(data));
+// }, []);
+
+const paymentHistoryData = useCallback(async () => {
+  try {
+    const response = await fetch(`http://${myIP}:4000/HistoryDetail`, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${token}`, // 로그인한 사용자의 토큰을 header에 포함시킵니다.
+      },
+    });
+    const data = await response.json();
+    setData(data);
+  } catch (error) {
+    console.error(error);
+  }
+}, [myIP]);
+
+useEffect(() => {
+  paymentHistoryData();
+}, [paymentHistoryData]);
+
+useEffect(() => {
+  const socket = io(`http://${myIP}:4000`);
+
+  socket.on('paymentDataChanged', async () => {
+    await paymentHistoryData();
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, [myIP, token]);
+
 
   return (
     <ScrollView

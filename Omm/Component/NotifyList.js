@@ -11,9 +11,11 @@ const NotifyList = ({ title = "",store = "", description = "", img = "", onPress
         return 'cooking.png';
       case '배달 중':
         return 'delivery.png';
-      case '픽업 대기':
+      case '포장 완료':
         return 'packaging.png';
       case '배달 완료':
+        return 'flag.png';
+        case '픽업 완료':
         return 'flag.png';
       default:
         return img;

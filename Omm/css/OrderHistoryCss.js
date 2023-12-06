@@ -74,4 +74,12 @@ export const ohstyles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 40,
   },
+
+  detail_box3: {
+    width: "100%",
+    justifyContent: "space-between",
+    marginBottom:20,
+    flexDirection : "row",
+    flexWrap:"wrap",
+  },
 });

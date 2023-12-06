@@ -6,40 +6,55 @@ import { IPContext } from '../contexts/IPContext';
 import io from 'socket.io-client';
 import { useCallback } from 'react';
 import { NotifyContext } from '../contexts/NotifyContext';
+import Toast from 'react-native-toast-message';
+import { AuthContext } from '../contexts/AuthContext';
 
 const NotifySection = () => {
     const { myIP } = useContext(IPContext);
     const [notifylists, setNotifyLists] = useState([]);
     const { isUpdate, setIsUpdate } = useContext(NotifyContext);
+    const { token } = useContext(AuthContext);
 
     const notifylistData = useCallback(async () => {
-        try {
-          const response = await fetch(`http://${myIP}:4000/ordernotify`, {
-            credentials: "include",
-          });
-          const notifylists = await response.json();
-          setNotifyLists(notifylists);
-        } catch (error) {
-          console.error(error);
-        }
-      }, [myIP]);
-    
-      useEffect(() => {
-        notifylistData();
-      }, [notifylistData]);
-    
-      useEffect(() => {
-        const socket = io(`ws://${myIP}:4000`);
-    
-        socket.on('notifydbDataChanged', () => {
-            setIsUpdate(true);
-          notifylistData();
+      try {
+        const response = await fetch(`http://${myIP}:4000/ordernotify`, {
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`, // 로그인한 사용자의 토큰을 header에 포함시킵니다.
+          },
         });
-    
-        return () => {
-          socket.disconnect();
-        };
-      }, [myIP, notifylistData]);
+        const notifylists = await response.json();
+        setNotifyLists(notifylists);
+      } catch (error) {
+        console.error(error);
+      }
+    }, [myIP]); // 로그인한 사용자의 토큰을 dependency로 추가합니다.
+  
+    useEffect(() => {
+      notifylistData();
+    }, [notifylistData]);
+  
+    useEffect(() => {
+      const socket = io(`http://${myIP}:4000`);
+  
+      socket.on('notifydbDataChanged', async () => {
+        Toast.show({
+          type: "success",
+          text1: "NEW",
+          text2: "새로운 알림이 왔습니다.",
+          position:"top",
+          bottomOffset: 20,
+          visibilityTime:2000,
+        });
+
+        setIsUpdate(true);
+        await notifylistData();
+      });
+  
+      return () => {
+        socket.disconnect();
+      };
+    }, [myIP, token]);
 
       return (
         <>

@@ -13,11 +13,14 @@ import { UserContextProvider } from "./contexts/UserContext";
 import { ProductContextProvider } from "./contexts/ProductContext";
 import { IPContextProvider } from "./contexts/IPContext";
 import { NotifyContextProvider } from "./contexts/NotifyContext";
+import Toast from "react-native-toast-message";
+import { AuthProvider } from "./contexts/AuthContext";
 
 library.add(fas, far);
 
 export default function App() {
   return (
+    <AuthProvider>
     <IPContextProvider>
       <UserContextProvider>
         <ProductContextProvider>
@@ -25,9 +28,12 @@ export default function App() {
           <NavigationContainer>
             <DrawerNavigation />
           </NavigationContainer>
+          <Toast />
           </NotifyContextProvider>
         </ProductContextProvider>
       </UserContextProvider>
     </IPContextProvider>
+    </AuthProvider>
+
   );
 }

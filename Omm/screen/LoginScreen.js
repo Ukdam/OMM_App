@@ -8,6 +8,7 @@ import { Input } from "react-native-elements";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IPContext } from "../contexts/IPContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 function LoginScreen({ navigation }) {
   const [username, setUserName] = useState("");
@@ -16,18 +17,23 @@ function LoginScreen({ navigation }) {
 
   const { setUserInfo } = useContext(UserContext);
   const { myIP } = useContext(IPContext);
+  const { setToken } = useContext(AuthContext);
 
   async function login(e) {
     e.preventDefault();
     let response;
 
+
     try {
       response = await fetch(`http://${myIP}:4000/login`, {
         method: "POST",
         body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", },
         credentials: "include",
       });
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status); 
+      }
     } catch (err) {
       console.log("err", err);
     }
@@ -35,6 +41,7 @@ function LoginScreen({ navigation }) {
     if (response && response.ok) {
       response.json().then((userInfo) => {
         setUserInfo(userInfo);
+        setToken(userInfo.token);
         setRedirect(true);
       });
     } else {
