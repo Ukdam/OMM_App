@@ -13,6 +13,9 @@ import { Button, Chip, TextInput } from "react-native-paper";
 import { IPContext } from "../contexts/IPContext";
 import { Rating } from "react-native-ratings";
 import { UserContext } from "../contexts/UserContext";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import * as ImagePicker from 'expo-image-picker';
+
 
 function HistoryDetailScreen({ route }) {
   const { itemData } = route.params;
@@ -26,34 +29,43 @@ function HistoryDetailScreen({ route }) {
 
   const { setUserInfo, userInfo } = useContext(UserContext);
 
+  const [image, setImage] = useState("");
+
   // review api
   async function Review(e) {
-    e.preventDefault();
     let response;
-
     const r_review = reviewText;
     const r_username = userInfo.username;
     const r_rating = rating;
     const r_ingredient = itemData.p_ingredient;
     const r_good = selectedIngredients.join(",");
-    const ImageUrl = "test";
     const r_paymentId = itemData._id;
     const r_userId = userInfo.id;
-    // console.log("ImageUrl = " + ImageUrl);
+
+    // FormData 객체 생성
+    let formData = new FormData();
+    formData.append('r_review', r_review);
+    formData.append('r_username', r_username);
+    formData.append('r_rating', r_rating);
+    formData.append('r_ingredient', r_ingredient);
+    formData.append('r_good', r_good);
+    formData.append('r_paymentId', r_paymentId);
+    formData.append('r_userId', r_userId);
+
+    // 이미지 파일 추가
+    let localUri = image;  // 이미지 파일의 로컬 경로
+    let filename = localUri.split('/').pop();
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+    formData.append('file', { uri: localUri, name: filename, type });
+
     try {
       response = await fetch(`http://${myIP}:4000/review`, {
         method: "POST",
-        body: JSON.stringify({
-          r_review,
-          r_username,
-          r_rating,
-          r_ingredient,
-          r_good,
-          ImageUrl,
-          r_paymentId,
-          r_userId,
-        }),
-        headers: { "Content-Type": "application/json" },
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
         credentials: "include",
       });
     } catch (err) {
@@ -70,6 +82,19 @@ function HistoryDetailScreen({ route }) {
       console.log("e : ", e);
     }
   }
+
+  const selectImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   return (
     <>
@@ -246,25 +271,36 @@ function HistoryDetailScreen({ route }) {
 
             {/* 이미지 */}
             <View style={styles.imgContainer}>
-              <View
-                style={{
-                  width: 100,
-                  height: 100,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderColor: "lightgray",
-                  borderWidth: 3,
-                  borderRadius: 10,
-                }}
-              >
-                <Image
-                  style={{ width: 80, height: 70, resizeMode: "cover" }}
-                  source={{
-                    uri: `http://${myIP}:4000/images/camera.png`,
-                  }}
-                />
-                <Text>사진</Text>
-              </View>
+              <TouchableOpacity onPress={selectImage}>
+                <View
+                  style={{
+                    width: 100,
+                    height: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: 'lightgray',
+                    borderWidth: 3,
+                    borderRadius: 10,
+                  }}>
+                  {image ? (
+                    <Image
+                      style={{ width: 100, height: 100, resizeMode: "cover", borderRadius: 10 }}
+                      source={{ uri: image }}
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        style={{ width: 80, height: 70, resizeMode: 'cover' }}
+                        source={{
+                          uri: `http://${myIP}:4000/images/camera.png`,
+                        }}
+                      />
+                      <Text>사진</Text>
+                    </>
+                  )}
+                </View>
+              </TouchableOpacity>
+
 
               <View
                 style={{
@@ -323,7 +359,7 @@ function HistoryDetailScreen({ route }) {
                   justifyContent: "center",
                   borderRadius: 10,
                 }}
-                onPress={Review}
+                onPress={() => { Review() }}
               >
                 등록
               </Button>

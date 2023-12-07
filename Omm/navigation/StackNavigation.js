@@ -2,7 +2,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HoemScreen from "../screen/HomeScreen";
-import DetailScreen from "../screen/DetailScreen";
 import Header from "./Header";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -46,11 +45,6 @@ const StackNavigation = () => {
       <Stack.Screen
         name="P_SearchShop"
         component={P_SearchShopScreen}
-        options={{ header: () => <Header /> }}
-      />
-      <Stack.Screen
-        name="Detail"
-        component={DetailScreen}
         options={{ header: () => <Header /> }}
       />
       <Stack.Screen
