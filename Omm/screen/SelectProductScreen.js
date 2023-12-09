@@ -1,36 +1,34 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { SelectProductCss } from "../css/SelectProductCss";
 import TapView from "../Component/TapView";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { ProductContext } from "../contexts/ProductContext";
+import { IPContext } from "../contexts/IPContext";
 
 function SelectProductScreen({ navigation, route }) {
   const { todoText } = route.params;
-  // console.log(todoText);
+  const { myIP } = useContext(IPContext);
+  const { productInfo, setProductInfo, selectedTab } = useContext(ProductContext); // selectedTab 추가
 
-  const { productInfo, setProductInfo } = useContext(ProductContext);
-  function TestFunc() {
-    console.log("------------------------");
-    Object.entries(productInfo).forEach(([category, products]) => {
-      console.log(`Category: ${category}`);
-
-      products.forEach((product, index) => {
-        console.log(
-          ` >>> ${product.ProductName} : 개수 ${product.count} 가격 ${product.Price}`
-        );
-      });
-    });
+  let imageSource;
+  if (selectedTab === "채소") {
+    imageSource = "1.png";
+  } else if (selectedTab === "고기") {
+    imageSource = "2.png";
+  } else if (selectedTab === "밥/면") {
+    imageSource = "3.png";
+  } else if (selectedTab === "소스") {
+    imageSource = "4.png";
+  } else {
+    imageSource = "5.png"
   }
+
 
   return (
     <View style={SelectProductCss.container}>
       <View style={SelectProductCss.ImageContainer}>
-        <TouchableOpacity onPress={TestFunc}>
-          <Text>
-            <FontAwesomeIcon icon={["fas", "bag-shopping"]} size={25} />
-          </Text>
-        </TouchableOpacity>
+        <Image alt="사진" source={{ uri: `http://${myIP}:4000/images/${imageSource}` }} style={{ width: "100%", height: "100%" }}></Image>
       </View>
       <View style={SelectProductCss.ProductContainer}>
         <TapView navigation={navigation} />

@@ -13,6 +13,7 @@ import SwiperProduct02 from "./SwiperProduct02";
 import SwiperProduct03 from "./SwiperProduct03";
 import SwiperProduct04 from "./SwiperProduct04";
 import SwiperProduct05 from "./SwiperProduct05";
+import { ProductContext } from "../contexts/ProductContext";
 
 const FirstRoute = () => <SwiperProduct />;
 const SecondRoute = () => <SwiperProduct02 />;
@@ -21,6 +22,7 @@ const FourRoute = () => <SwiperProduct04 />;
 const FiveRoute = () => <SwiperProduct05 />;
 
 export default class TabViewExample extends React.Component {
+  static contextType = ProductContext; // contextType을 설정
   state = {
     index: 0,
     routes: [
@@ -31,8 +33,6 @@ export default class TabViewExample extends React.Component {
       { key: "five", title: "추가" },
     ],
   };
-
-  _handleIndexChange = (index) => this.setState({ index });
 
   _renderTabBar = (props) => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
@@ -57,7 +57,10 @@ export default class TabViewExample extends React.Component {
           return (
             <TouchableOpacity
               style={tabItemStyle}
-              onPress={() => this.setState({ index: i })}
+              onPress={() => {
+                this.setState({ index: i });
+                this.context.setSelectedTab(route.title); // setSelectedTab 사용
+              }}
               key={route.key}
             >
               <Animated.Text style={{ opacity }}>{route.title}</Animated.Text>
@@ -75,6 +78,11 @@ export default class TabViewExample extends React.Component {
     four: FourRoute,
     five: FiveRoute,
   });
+
+  _handleIndexChange = (index) => {
+    this.setState({ index });
+    this.context.setSelectedTab(this.state.routes[index].title); // setSelectedTab 사용
+  };
 
   render() {
     return (

@@ -11,9 +11,10 @@ export function ProductContextProvider({ children }) {
     etc: [],
   };
   const [productInfo, setProductInfo] = useState(initialProducts);
+  const [selectedTab, setSelectedTab] = useState("채소"); // 추가된 상태
 
   return (
-    <ProductContext.Provider value={{ productInfo, setProductInfo }}>
+    <ProductContext.Provider value={{ productInfo, setProductInfo, selectedTab, setSelectedTab }}>
       {children}
     </ProductContext.Provider>
   );
