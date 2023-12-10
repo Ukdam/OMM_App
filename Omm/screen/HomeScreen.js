@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Alert, Image } from "react-native";
 import { styles } from "../css/css";
 import Swiper from "react-native-swiper";
 import ImgEvent1 from "../Image/Banner01.svg";
@@ -88,44 +88,70 @@ function HoemScreen({ navigation }) {
           </View>
           <View style={styles.btn_container}>
             <View style={styles.btn_box}>
-              <CustomButton02
-                buttonColor={"#FFCEaa"}
-                title={"배달"}
-                onPress={() => username ?  navigation.navigate("SearchShop") 
-                : 
-                Toast.show({
+              <TouchableOpacity onPress={() => username ?  navigation.navigate("SearchShop") 
+                : Toast.show({
                   type: "error",
                   text1: "로그인 후 가능합니다.",
                   position: "top",
                   bottomOffset: 20,
                   visibilityTime: 2000,
-                })}
-              />
+                })}>
+                <View style={{
+                  // backgroundColor:"#FFCEaa", 
+                  borderColor: '#FFCEaa',
+                  borderWidth: 3,
+                  borderRadius: 10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 10,
+                  borderRadius: 15,
+                  width: 100,
+                  height: 100,
+                }}>
+                  <Image
+                      style={{ width: 90, height: 90, resizeMode: "cover" }}
+                      source={{ uri: `http://${myIP}:4000/images/fast-delivery.png`, }}
+                    />
+                </View>
+              </TouchableOpacity>
               <Text style={styles.btntxt}>배달</Text>
             </View>
             <View style={styles.btn_box}>
-              <CustomButton02
-                buttonColor={"#FFCEaa"}
-                title={"포장"}
-                onPress={() => username ? navigation.navigate("P_SearchShop") : 
-                Toast.show({
+            <TouchableOpacity onPress={() => username ?  navigation.navigate("SearchShop") 
+                : Toast.show({
                   type: "error",
                   text1: "로그인 후 가능합니다.",
                   position: "top",
                   bottomOffset: 20,
                   visibilityTime: 2000,
-                })}
-              />
+                })}>
+                <View style={{
+                  borderColor: '#FFCEaa',
+                  borderWidth: 3,
+                  borderRadius: 10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 10,
+                  borderRadius: 15,
+                  width: 100,
+                  height: 100,
+                }}>
+                  <Image
+                      style={{ width: 75, height: 75, resizeMode: "cover" }}
+                      source={{ uri: `http://${myIP}:4000/images/food-delivery.png`, }}
+                    />
+                </View>
+              </TouchableOpacity>
               <Text style={styles.btntxt}>포장</Text>
             </View>
           </View>
         </View>
         {/* ContentContainerStyle={styles.} */}
-        <ScrollView style={styles.zzim_container} horizontal>
+        {/* <ScrollView style={styles.zzim_container} horizontal>
           <ZzimCard />
           <ZzimCard />
           <ZzimCard />
-        </ScrollView>
+        </ScrollView> */}
       </ScrollView>
     </View>
   );

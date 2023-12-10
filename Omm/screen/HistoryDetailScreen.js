@@ -14,8 +14,8 @@ import { Button, Chip, TextInput } from "react-native-paper";
 import { IPContext } from "../contexts/IPContext";
 import { Rating } from "react-native-ratings";
 import { UserContext } from "../contexts/UserContext";
-
 import * as ImagePicker from 'expo-image-picker';
+import Toast from "react-native-toast-message";
 
 
 function HistoryDetailScreen({ route }) {
@@ -77,7 +77,14 @@ function HistoryDetailScreen({ route }) {
 
     try {
       if (response && response.ok) {
-        Alert.alert("등록 성공");
+        setModalVisible(false);
+        Toast.show({
+          type: "success",
+          text1: "등록 성공",
+          position: "top",
+          bottomOffset: 20,
+          visibilityTime: 2000,
+        });
       } else {
         Alert.alert("등록 실패");
       }
@@ -303,27 +310,6 @@ function HistoryDetailScreen({ route }) {
                   )}
                 </View>
               </TouchableOpacity>
-
-
-              <View
-                style={{
-                  width: 100,
-                  height: 100,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderColor: "lightgray",
-                  borderWidth: 3,
-                  borderRadius: 10,
-                }}
-              >
-                <Image
-                  style={{ width: 80, height: 70, resizeMode: "cover" }}
-                  source={{
-                    uri: `http://${myIP}:4000/images/camera.png`,
-                  }}
-                />
-                <Text>사진</Text>
-              </View>
             </View>
 
             {/* 작성 */}

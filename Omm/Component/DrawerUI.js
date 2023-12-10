@@ -18,6 +18,7 @@ import { IPContext } from "../contexts/IPContext";
 import io from 'socket.io-client';
 import NotifyList from "./NotifyList";
 import NotifySection from "./NotifySection";
+import Toast from "react-native-toast-message";
 
 function DrawerUI({ navigation }) {
   const styles = StyleSheet.create({
@@ -157,7 +158,14 @@ function DrawerUI({ navigation }) {
               />
               <JangBtn
                 title={"내 정보"}
-                onPress={() => navigation.navigate("MyProfile")}
+                onPress={() =>  username ? navigation.navigate("MyProfile") : 
+                Toast.show({
+                  type: "error",
+                  text1: "로그인 후 가능합니다.",
+                  position: "top",
+                  bottomOffset: 20,
+                  visibilityTime: 2000,
+                })}
                 ver={"1"}
               />
             </View>
@@ -199,7 +207,14 @@ function DrawerUI({ navigation }) {
           </View>
           <TouchableOpacity
             style={styles.list_historybox}
-            onPress={() => navigation.navigate("History")}
+            onPress={() => username ? navigation.navigate("History") : 
+            Toast.show({
+              type: "error",
+              text1: "로그인 후 가능합니다.",
+              position: "top",
+              bottomOffset: 20,
+              visibilityTime: 2000,
+            })}
           >
             <FontAwesomeIcon
               icon={["fas", "receipt"]}
@@ -208,6 +223,7 @@ function DrawerUI({ navigation }) {
             />
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>주문내역</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.list_settingbox}
             onPress={() => navigation.navigate("Setting")}
