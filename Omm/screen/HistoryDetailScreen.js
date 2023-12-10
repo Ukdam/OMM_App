@@ -7,13 +7,14 @@ import {
   StyleSheet,
   Image,
   Alert,
+  TouchableOpacity
 } from "react-native";
 import { ohstyles } from "../css/OrderHistoryCss";
 import { Button, Chip, TextInput } from "react-native-paper";
 import { IPContext } from "../contexts/IPContext";
 import { Rating } from "react-native-ratings";
 import { UserContext } from "../contexts/UserContext";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -54,10 +55,12 @@ function HistoryDetailScreen({ route }) {
 
     // 이미지 파일 추가
     let localUri = image;  // 이미지 파일의 로컬 경로
-    let filename = localUri.split('/').pop();
-    let match = /\.(\w+)$/.exec(filename);
-    let type = match ? `image/${match[1]}` : `image`;
-    formData.append('file', { uri: localUri, name: filename, type });
+    if (localUri) {  // 이미지가 선택되었을 때만 formData에 추가
+      let filename = localUri.split('/').pop();
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? `image/${match[1]}` : `image`;
+      formData.append('file', { uri: localUri, name: filename, type });
+    }
 
     try {
       response = await fetch(`http://${myIP}:4000/review`, {
@@ -91,7 +94,7 @@ function HistoryDetailScreen({ route }) {
       quality: 1,
     });
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
