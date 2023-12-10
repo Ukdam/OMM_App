@@ -127,10 +127,12 @@ const styles = StyleSheet.create({
     borderRightWidth: 1, // 선택된 탭의 오른쪽 테두리
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    backgroundColor: "#FFEFC8",
+    // backgroundColor: "#FFEFC8",
+    borderColor:"#27A300",
   },
   unselectedTabItem: {
     borderBottomWidth: 1,
+    borderColor:"#27A300",
   },
   btn_container: {
     alignItems: "center",

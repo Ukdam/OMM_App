@@ -20,7 +20,7 @@ export const SwiperProductCss = StyleSheet.create({
         margin: 30
     },
     text: {
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: "bold",
     },
     buttonText: {

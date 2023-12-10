@@ -9,12 +9,14 @@ export const SelectProductCss = StyleSheet.create({
     ImageContainer: {
         justifyContent: "center",
         width: "100%",
-        height: "40%",
-        resizeMode: "contain"
+        marginTop:"4%",
+        marginBottom:"4%",
+        height: "22%",
+        resizeMode: "cover"
     },
     ProductContainer: {
         flex: 1,
-        backgroundColor: "#FFEFC8",
+        // backgroundColor: "#FFEFC8",
         width: "100%",
         height: "100%",
         borderRadius: 30,

@@ -162,7 +162,7 @@ function DrawerUI({ navigation }) {
               />
             </View>
             <View style={styles.profile_box}>
-              <Text style={{ fontSize: 22 }}>{username ? "VIP" : "등급"}</Text>
+              {/* <Text style={{ fontSize: 22 }}>{username ? "VIP" : "등급"}</Text> */}
 
               <Text style={{ fontSize: 22 }}>{username ? name : "이름"}</Text>
             </View>

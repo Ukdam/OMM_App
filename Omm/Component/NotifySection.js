@@ -58,7 +58,8 @@ const NotifySection = () => {
 
       return (
         <>
-            <Text style={{fontSize:16, textAlign:"center", marginBottom:10, marginTop:10}}>알림 창</Text>
+            <Text style={{fontSize:16, textAlign:"center", marginBottom:10, marginTop:10, fontWeight:"bold"}}>알림 창</Text>
+            <View style={{width:"90%", height:1, backgroundColor:"#FFD60A", alignSelf:"center"}}></View>
                 <ScrollView contentContainerStyle={{ width:"90%", alignSelf:"center",}}>
                 {notifylists.length > 0 &&
                       notifylists.map((notifylist) => (

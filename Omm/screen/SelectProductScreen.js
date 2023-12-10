@@ -28,7 +28,8 @@ function SelectProductScreen({ navigation, route }) {
   return (
     <View style={SelectProductCss.container}>
       <View style={SelectProductCss.ImageContainer}>
-        <Image alt="사진" source={{ uri: `http://${myIP}:4000/images/${imageSource}` }} style={{ width: "100%", height: "100%" }}></Image>
+        <Image alt="사진" source={{ uri: `http://${myIP}:4000/images/${imageSource}` }} 
+        style={{ width: "100%", height: "100%"}}></Image>
       </View>
       <View style={SelectProductCss.ProductContainer}>
         <TapView navigation={navigation} />

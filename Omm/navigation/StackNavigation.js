@@ -27,6 +27,7 @@ import SelectProductScreen from "../screen/SelectProductScreen";
 import TossPayment from "../Component/TossPayment";
 import P_SearchShopScreen from "../screen/P_SearchShopScreen";
 import P_SelectProductScreen from "../screen/P_SelectProductScreen";
+import Header2 from "./Header2";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -100,6 +101,8 @@ const StackNavigation = () => {
         name="SelectProduct"
         component={SelectProductScreen}
         options={{ header: () => <Header /> }}
+        // options={{ header: () => <Header2 /> }}
+        // options={{ headerShown: false }}
       />
       <Stack.Screen name="주문 상세" component={HistoryDetailScreen} />
 
