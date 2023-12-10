@@ -82,4 +82,50 @@ export const ohstyles = StyleSheet.create({
     flexDirection : "row",
     flexWrap:"wrap",
   },
+
+
+  review_contentBox: {
+    width: "100%",
+    height: "auto",
+    minHeight: 300,
+    backgroundColor:"#F3EEEA",
+    marginBottom:20,
+    flexDirection:"column",
+    borderRadius: 15, 
+  },
+
+  review_myBox: {
+    backgroundColor:"white",
+    alignSelf:"flex-start",
+    marginTop:30,
+    marginLeft:10,
+    marginBottom: 10, 
+    maxWidth: '70%', 
+    backgroundColor: 'whitesmoke', 
+    borderRadius: 20, 
+    padding: 10, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+
+  review_reBox: {
+    backgroundColor:"white",
+    alignSelf:"flex-end",
+    marginTop:30,
+    marginRight:10,
+    marginBottom: 10, 
+    maxWidth: '70%', 
+    backgroundColor: '#2196f3', 
+    borderRadius: 20, 
+    padding: 10, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+
 });

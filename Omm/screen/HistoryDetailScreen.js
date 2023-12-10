@@ -16,6 +16,9 @@ import { Rating } from "react-native-ratings";
 import { UserContext } from "../contexts/UserContext";
 import * as ImagePicker from 'expo-image-picker';
 import Toast from "react-native-toast-message";
+import { useCallback } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { io } from "socket.io-client";
 
 
 function HistoryDetailScreen({ route }) {
@@ -27,10 +30,48 @@ function HistoryDetailScreen({ route }) {
   const [rating, setRating] = useState(0);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [reviewText, setReviewText] = useState("");
-
+  const { token } = useContext(AuthContext);
   const { setUserInfo, userInfo } = useContext(UserContext);
 
   const [image, setImage] = useState("");
+
+  const [rData, setRData] = useState([]);
+  const reviewDataCall = useCallback(async () => {
+    try {
+      const response = await fetch(`http://${myIP}:4000/reviewData`, {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`, // 로그인한 사용자의 토큰을 header에 포함시킵니다.
+        },
+      });
+      let data = await response.json();
+    // r_paymentId와 p_paymentId가 일치하는 데이터만 필터링합니다.
+      console.log("페이먼트 아이디 : " + itemData._id);
+      data = data.filter(review => review.r_paymentId === itemData._id);
+      console.log("필터링 후 : " + JSON.stringify(data));
+      setRData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [myIP]);
+  
+  useEffect(() => {
+    reviewDataCall();
+  }, [reviewDataCall]);
+  
+  useEffect(() => {
+    const socket = io(`http://${myIP}:4000`);
+  
+    socket.on('reviewDataChanged', async () => {
+      await reviewDataCall();
+    });
+  
+    return () => {
+      socket.disconnect();
+    };
+  }, [myIP, token]);
+
+  const myReview = rData[0];
 
   // review api
   async function Review(e) {
@@ -201,9 +242,19 @@ function HistoryDetailScreen({ route }) {
             ))}
           </View>
 
-          <View style={{ marginBottom: 30 }}>
+          <View style={{ marginBottom: 30, width:"100%" }}>
             {itemData.p_review ? (
-              <Text>후기 작성 완료</Text>
+              <>
+                <Text style={{textAlign:"center", color:"#333", fontWeight:"bold", fontSize:16, marginBottom:20}}>후기 작성 완료</Text>
+                <View style={ohstyles.review_contentBox}>
+                  <View style={ohstyles.review_myBox}>
+                    <Text style={{color:"#333", fontWeight:"bold"}}>{myReview?.r_review}</Text>
+                  </View>
+                  <View style={ohstyles.review_reBox}>
+                    <Text style={{textAlign:"right", color:"white", fontWeight:"bold"}}>{myReview?.r_reply}</Text>
+                  </View>
+                </View>
+              </>
             ) : (
               <Button
                 mode="contained"

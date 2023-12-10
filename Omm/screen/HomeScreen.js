@@ -60,7 +60,7 @@ function HoemScreen({ navigation }) {
           </View>
         </Swiper>
       </View>
-      <ScrollView style={styles.main_container}>
+      <View style={styles.main_container}>
         {username ? (
           <View style={styles.login_container}>
             <Text style={styles.login_txt1}>{name} 님</Text>
@@ -152,7 +152,7 @@ function HoemScreen({ navigation }) {
           <ZzimCard />
           <ZzimCard />
         </ScrollView> */}
-      </ScrollView>
+      </View>
     </View>
   );
 }
