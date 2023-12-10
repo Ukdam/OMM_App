@@ -13,15 +13,15 @@ function SelectProductScreen({ navigation, route }) {
 
   let imageSource;
   if (selectedTab === "채소") {
-    imageSource = "01.png";
+    imageSource = "001(500x400).png";
   } else if (selectedTab === "고기") {
-    imageSource = "02.png";
+    imageSource = "002(500x400).png";
   } else if (selectedTab === "밥/면") {
-    imageSource = "03.png";
+    imageSource = "003(500x400).png";
   } else if (selectedTab === "소스") {
-    imageSource = "04.png";
+    imageSource = "004(500x400).png";
   } else {
-    imageSource = "05.png"
+    imageSource = "005(500x400).png"
   }
 
 

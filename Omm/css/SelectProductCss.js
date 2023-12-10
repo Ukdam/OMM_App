@@ -11,7 +11,7 @@ export const SelectProductCss = StyleSheet.create({
         width: "100%",
         marginTop:"4%",
         marginBottom:"4%",
-        height: "22%",
+        height: "25%",
         resizeMode: "cover"
     },
     ProductContainer: {
