@@ -18,6 +18,7 @@ import { UserContext } from "../contexts/UserContext";
 import { ProductContext } from "../contexts/ProductContext";
 import { useEffect } from "react";
 import { IPContext } from "../contexts/IPContext";
+import Toast from "react-native-toast-message";
 
 function PaymentScreen_D({ navigation }) {
   const { myIP } = useContext(IPContext);
@@ -143,9 +144,22 @@ function PaymentScreen_D({ navigation }) {
     }
 
     if (response && response.ok) {
-      Alert.alert("결제 성공");
+      Toast.show({
+        type: "success",
+        text1: "결제 성공",
+        position: "top",
+        bottomOffset: 20,
+        visibilityTime: 2000,
+      });
+      navigation.navigate('Main');
     } else {
-      Alert.alert("결제 실패");
+      Toast.show({
+                  type: "error",
+                  text1: "결제 실패",
+                  position: "top",
+                  bottomOffset: 20,
+                  visibilityTime: 2000,
+                });
     }
   }
 

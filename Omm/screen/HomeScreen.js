@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
 import { styles } from "../css/css";
 import Swiper from "react-native-swiper";
 import ImgEvent1 from "../Image/Banner01.svg";
@@ -10,6 +10,7 @@ import ZzimCard from "../Component/ZzimCard";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import { IPContext } from "../contexts/IPContext";
+import Toast from "react-native-toast-message";
 
 function HoemScreen({ navigation }) {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -31,6 +32,8 @@ function HoemScreen({ navigation }) {
 
   const username = userInfo?.username;
   const name = userInfo?.name;
+
+  
 
   return (
     <View style={styles.container}>
@@ -88,7 +91,15 @@ function HoemScreen({ navigation }) {
               <CustomButton02
                 buttonColor={"#FFCEaa"}
                 title={"배달"}
-                onPress={() => navigation.navigate("SearchShop")}
+                onPress={() => username ?  navigation.navigate("SearchShop") 
+                : 
+                Toast.show({
+                  type: "error",
+                  text1: "로그인 후 가능합니다.",
+                  position: "top",
+                  bottomOffset: 20,
+                  visibilityTime: 2000,
+                })}
               />
               <Text style={styles.btntxt}>배달</Text>
             </View>
@@ -96,7 +107,14 @@ function HoemScreen({ navigation }) {
               <CustomButton02
                 buttonColor={"#FFCEaa"}
                 title={"포장"}
-                onPress={() => navigation.navigate("P_SearchShop")}
+                onPress={() => username ? navigation.navigate("P_SearchShop") : 
+                Toast.show({
+                  type: "error",
+                  text1: "로그인 후 가능합니다.",
+                  position: "top",
+                  bottomOffset: 20,
+                  visibilityTime: 2000,
+                })}
               />
               <Text style={styles.btntxt}>포장</Text>
             </View>
