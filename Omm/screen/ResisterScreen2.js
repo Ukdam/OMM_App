@@ -1,5 +1,5 @@
 import { ResisterCss2 } from "../css/ResisterCss2";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import CustomButton from "../Component/CustomButton";

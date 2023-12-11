@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import { IPContext } from "../contexts/IPContext";
 import Toast from "react-native-toast-message";
 
-function PaymentScreen_P() {
+function PaymentScreen_P({navigation}) {
 
   const { myIP } = useContext(IPContext);
   // 메뉴 재료 정보

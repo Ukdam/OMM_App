@@ -21,13 +21,13 @@ import { AuthContext } from "../contexts/AuthContext";
 import { io } from "socket.io-client";
 
 
-function HistoryDetailScreen({ route }) {
+function HistoryDetailScreen({ route, navigation }) {
   const { itemData } = route.params;
 
   const { myIP } = useContext(IPContext);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [reviewText, setReviewText] = useState("");
   const { token } = useContext(AuthContext);
@@ -126,6 +126,7 @@ function HistoryDetailScreen({ route }) {
           bottomOffset: 20,
           visibilityTime: 2000,
         });
+        navigation.navigate("Main");
       } else {
         Alert.alert("등록 실패");
       }
