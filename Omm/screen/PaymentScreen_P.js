@@ -1,11 +1,65 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, TextInput } from "react-native";
+import React, { useContext, useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
 import { CheckBox } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
+import { UserContext } from "../contexts/UserContext";
+import { ProductContext } from "../contexts/ProductContext";
+import { useEffect } from "react";
+import { IPContext } from "../contexts/IPContext";
+import Toast from "react-native-toast-message";
 
 function PaymentScreen_P() {
+
+  const { myIP } = useContext(IPContext);
+  // 메뉴 재료 정보
+  const { productInfo } = useContext(ProductContext);
+  const [productList, setProductList] = useState("");
+  const [addPrice, setAddPrice] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  useEffect(() => {
+    const list = Object.values(productInfo).reduce((list, products) => {
+      const productStr = products
+        .map((product) => `${product.ProductName} x ${product.count}`)
+        .join(", ");
+      return list ? `${list}, ${productStr}` : productStr;
+    }, "");
+
+    setProductList(list);
+
+    const total = Object.values(productInfo).reduce((total, products) => {
+      return (
+        total +
+        products.reduce(
+          (total, product) => total + product.Price * product.count,
+          0
+        )
+      );
+    }, 0);
+    setGrandTotal(total);
+  }, [productInfo]);
+
+  useEffect(() => {
+    const additionalPrice = grandTotal < 12000 ? 12000 - grandTotal : 0;
+    setAddPrice(additionalPrice);
+  }, [grandTotal]);
+  // 회원 정보
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
+  const mainadress = userInfo?.mainadress;
+  const sideadress = userInfo?.sideadress;
+
+  const userId = userInfo?.id;
+
+
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [radioIndex, setRadioIndex] = useState(0);
@@ -20,6 +74,105 @@ function PaymentScreen_P() {
 
   // textarea
   const [textAValue, setTextAValue] = useState("");
+
+  const p_store = "원광대점";
+  const p_kind = "포장";
+  const p_quantity = 1;
+  const p_price = grandTotal + 2000 + addPrice;
+  const p_adress = mainadress + " " + sideadress;
+  const p_ingredient = productList;
+
+  async function Payment(e) {
+    e.preventDefault();
+    let response;
+
+    const requsetToSave = [];
+    if (check1) {
+      requsetToSave.push("문 앞에 놓고 문자주세요");
+    }
+    if (check2) {
+      requsetToSave.push("일회용 수저, 포크가 필요해요");
+    }
+    if (!selectValue === "직접 입력") {
+      requsetToSave.push(selectItems);
+    } else {
+      requsetToSave.push(textAValue);
+    }
+
+    const p_request = requsetToSave.join("_");
+
+    let p_payment;
+    switch (radioIndex) {
+      case 0:
+        p_payment = "카드 결제";
+        break;
+      case 1:
+        p_payment = "현장 결제";
+        break;
+    }
+
+    const p_userId = userId;
+
+    try {
+      response = await fetch(`http://${myIP}:4000/payment`, {
+        method: "POST",
+        body: JSON.stringify({
+          p_store,
+          p_kind,
+          p_quantity,
+          p_price,
+          p_adress,
+          p_request,
+          p_ingredient,
+          p_payment,
+          p_state: "미 접수",
+          p_userId,
+        }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
+
+    if (response && response.ok) {
+      Toast.show({
+        type: "success",
+        text1: "결제 성공",
+        position: "top",
+        bottomOffset: 20,
+        visibilityTime: 2000,
+      });
+      navigation.navigate('Main');
+    } else {
+      Toast.show({
+                  type: "error",
+                  text1: "결제 실패",
+                  position: "top",
+                  bottomOffset: 20,
+                  visibilityTime: 2000,
+                });
+    }
+  }
+
+  //카트 영역에서 카테고리가 json에 영어로 저장되어 있어서 번역
+  function translateCategory(category) {
+    switch (category) {
+      case 'vegetable':
+        return '야채';
+      case 'meat':
+        return '고기';
+      case 'rice':
+        return '밥/면';
+      case 'sauce':
+        return '소스';
+      case 'etc':
+        return '추가';
+      default:
+        return category;
+    }
+  }
+
   return (
     <>
       <ScrollView
@@ -50,11 +203,34 @@ function PaymentScreen_P() {
           </Text>
           <Text style={{ fontSize: 12 }}>1층</Text>
         </View>
+
         <View style={pstyles.cart_container}>
           <View style={pstyles.cart_menubox}>
-            <Text>메뉴</Text>
+            <Text style={{width:"100%", fontSize:18, fontWeight:"bold", height:50, lineHeight:40, marginBottom:10}}>메뉴</Text>
+            {Object.entries(productInfo).map(([category, products]) => {
+              const totalPrice = products.reduce(
+                (total, product) => total + product.Price * product.count,
+                0
+              );
+              return (
+                <View key={category} style={pstyles.cart_menulayout}>
+                  <Text style={pstyles.cart_categoryText}>{translateCategory(category)}</Text>
+                  <View style={pstyles.__cart_menulayout}>
+                  {products.map((product, index) => (
+                    <View key={index} style={pstyles.__cart_text}>
+                      <Text style={{fontSize:16,fontWeight:"bold"}}>{`${product.ProductName}`}</Text>
+                      <Text style={{alignSelf:"flex-end"}}>{` x${product.count}`}</Text>
+                    </View>
+                  ))}
+                </View>
+                  </View>
+                  
+              );
+            })}
+            <Text style={{textAlign:"right", width:"100%",height:30}}>{`총 가격: ${grandTotal}`}</Text>
           </View>
           <View style={pstyles.cart_addmenu}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text
               style={{
                 fontSize: 14,
@@ -62,8 +238,9 @@ function PaymentScreen_P() {
                 color: "#3182ce",
               }}
             >
-              메뉴 추가하기
+              메뉴 변경하기
             </Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -103,8 +280,7 @@ function PaymentScreen_P() {
           <View
             style={[
               pstyles.reqeust_selectbox,
-              { height: selectOpen || selectValue === "직접 입력" ? 150 : 60 },
-              // { height: selectValue === "직접 입력" ? 200 : 60 },
+              { height: selectOpen || selectValue === "직접 입력" ? 200 : 60 },
             ]}
           >
             <DropDownPicker
@@ -120,6 +296,8 @@ function PaymentScreen_P() {
                 borderWidth: 2,
               }}
               style={{ borderColor: "#d8d9da", borderWidth: 2 }}
+              listMode="SCROLLVIEW"
+              dropDownDirection="BOTTOM"
             />
             {selectValue === "직접 입력" ? (
               <>
@@ -186,16 +364,8 @@ function PaymentScreen_P() {
           <View style={pstyles.amount_contentbox}>
             <View style={pstyles.amount_contentflex}>
               <Text>상품 금액</Text>
-              <Text>0 원</Text>
+              <Text>{grandTotal} 원</Text>
             </View>
-            {/* <View style={pstyles.amount_contentflex}>
-              <Text>추가 금액</Text>
-              <Text>0 원</Text>
-            </View>
-            <View style={pstyles.amount_contentflex}>
-              <Text>배달 요금</Text>
-              <Text>0 원</Text>
-            </View> */}
           </View>
           <View style={pstyles.amount_amoutbox}>
             <Text
@@ -212,14 +382,14 @@ function PaymentScreen_P() {
                 fontWeight: "bold",
               }}
             >
-              0 원
+              {grandTotal + 0 + addPrice} 원
             </Text>
           </View>
         </View>
         <View style={pstyles.blank}></View>
       </ScrollView>
       <View style={pstyles.btn_container}>
-        <JangBtnPay title={"결제 하기"} />
+        <JangBtnPay title={"결제 하기"} onPress={Payment}/>
       </View>
     </>
   );

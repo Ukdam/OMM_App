@@ -117,7 +117,7 @@ function HoemScreen({ navigation }) {
               <Text style={styles.btntxt}>배달</Text>
             </View>
             <View style={styles.btn_box}>
-            <TouchableOpacity onPress={() => username ?  navigation.navigate("SearchShop") 
+            <TouchableOpacity onPress={() => username ?  navigation.navigate("P_SearchShop") 
                 : Toast.show({
                   type: "error",
                   text1: "로그인 후 가능합니다.",

@@ -3,17 +3,13 @@ import {
   View,
   Text,
   ScrollView,
-  SafeAreaView,
-  Button,
   TextInput,
-  Alert,
   TouchableOpacity,
 } from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
 import { CheckBox } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
-import TossPayment from "../Component/TossPayment";
 import { UserContext } from "../contexts/UserContext";
 import { ProductContext } from "../contexts/ProductContext";
 import { useEffect } from "react";
@@ -378,14 +374,6 @@ function PaymentScreen_D({ navigation }) {
             <View style={pstyles.amount_contentflex}>
               <Text>상품 금액</Text>
               <Text>{grandTotal} 원</Text>
-            </View>
-            <View style={pstyles.amount_contentflex}>
-              <Text>추가 금액</Text>
-              <Text>{addPrice} 원</Text>
-            </View>
-            <View style={pstyles.amount_contentflex}>
-              <Text>배달 요금</Text>
-              <Text>0 원</Text>
             </View>
           </View>
           <View style={pstyles.amount_amoutbox}>
