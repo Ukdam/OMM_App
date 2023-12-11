@@ -206,7 +206,7 @@ export const pstyles = StyleSheet.create({
   btn_container: {
     alignItems: "center",
     justifyContent: "center",
-    width: "240",
+    width: 240,
     height: 50,
     borderRadius: 12,
     backgroundColor: "white",

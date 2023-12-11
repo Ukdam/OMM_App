@@ -5,6 +5,7 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Keyboard,
 } from "react-native";
 import { pstyles } from "../css/PaymentDCss";
 import JangBtnPay from "../Component/JangBtnPay";
@@ -177,6 +178,49 @@ function PaymentScreen_D({ navigation }) {
     }
   }
 
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+
+useEffect(() => {
+  const keyboardDidShowListener = Keyboard.addListener(
+    'keyboardDidShow',
+    () => {
+      setKeyboardStatus(true);
+    }
+  );
+  const keyboardDidHideListener = Keyboard.addListener(
+    'keyboardDidHide',
+    () => {
+      setKeyboardStatus(false);
+    }
+  );
+
+  return () => {
+    keyboardDidShowListener.remove();
+    keyboardDidHideListener.remove();
+  };
+}, []);
+
+const [isBottom, setIsBottom] = useState(false);
+
+const onScroll = (event) => {
+  const layoutHeight = event.nativeEvent.layoutMeasurement.height;
+  const contentHeight = event.nativeEvent.contentSize.height;
+  const scrollOffset = event.nativeEvent.contentOffset.y;
+  const isAtBottom = (layoutHeight + scrollOffset) >= (contentHeight - 20);
+  setIsBottom(isAtBottom);
+};
+
+let bottomValue;
+if (keyboardStatus && isBottom) {
+  bottomValue = 10;
+} else if (keyboardStatus) {
+  bottomValue = -50;
+} else if (isBottom) {
+  bottomValue = 10;
+} else {
+  bottomValue = 10;
+}
+
   return (
     <>
       <ScrollView
@@ -187,6 +231,8 @@ function PaymentScreen_D({ navigation }) {
           backgroundColor: "#fff",
           width: "100%",
         }}
+        onScroll={onScroll}
+        scrollEventThrottle={16}
       >
         <View style={pstyles.title_container}>
           <Text style={{ fontSize: 12, opacity: 0 }}>배달 (30분)</Text>
@@ -397,7 +443,7 @@ function PaymentScreen_D({ navigation }) {
         </View>
         <View style={pstyles.blank}></View>
       </ScrollView>
-      <View style={pstyles.btn_container}>
+      <View style={[pstyles.btn_container,{bottom : bottomValue}]}>
         <JangBtnPay
           title={"결제 하기"}
           onPress={Payment}
