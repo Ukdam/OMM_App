@@ -45,27 +45,27 @@ function HistoryDetailScreen({ route }) {
         },
       });
       let data = await response.json();
-    // r_paymentId와 p_paymentId가 일치하는 데이터만 필터링합니다.
-      console.log("페이먼트 아이디 : " + itemData._id);
+      // r_paymentId와 p_paymentId가 일치하는 데이터만 필터링합니다.
+
       data = data.filter(review => review.r_paymentId === itemData._id);
-      console.log("필터링 후 : " + JSON.stringify(data));
+
       setRData(data);
     } catch (error) {
       console.error(error);
     }
   }, [myIP]);
-  
+
   useEffect(() => {
     reviewDataCall();
   }, [reviewDataCall]);
-  
+
   useEffect(() => {
     const socket = io(`http://${myIP}:4000`);
-  
+
     socket.on('reviewDataChanged', async () => {
       await reviewDataCall();
     });
-  
+
     return () => {
       socket.disconnect();
     };
@@ -147,6 +147,12 @@ function HistoryDetailScreen({ route }) {
     }
   };
 
+  const date = new Date(itemData.createdAt);
+  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const clock = date.getHours();
+  const minutes = date.getMinutes();
   return (
     <>
       <ScrollView
@@ -175,7 +181,7 @@ function HistoryDetailScreen({ route }) {
                 {itemData.p_kind}
               </Text>
               <Text style={{ fontSize: 14, marginTop: 15, marginBottom: 15 }}>
-                2023-11-12 / 10:20
+                {year}-{month}-{day} / {clock}:{minutes}
               </Text>
               <Text
                 style={{
@@ -186,12 +192,12 @@ function HistoryDetailScreen({ route }) {
                 {itemData.p_payment}
               </Text>
               <Text style={{ fontSize: 14, marginTop: 15 }}>
-                주문 번호 : 000001
+                주문 번호 : {itemData._id}
               </Text>
             </View>
             <Text
               style={{
-                fontSize: 24,
+                fontSize: 22,
                 width: 100,
                 textAlign: "center",
                 alignSelf: "center",
@@ -242,16 +248,16 @@ function HistoryDetailScreen({ route }) {
             ))}
           </View>
 
-          <View style={{ marginBottom: 30, width:"100%" }}>
+          <View style={{ marginBottom: 30, width: "100%" }}>
             {itemData.p_review ? (
               <>
-                <Text style={{textAlign:"center", color:"#333", fontWeight:"bold", fontSize:16, marginBottom:20}}>후기 작성 완료</Text>
+                <Text style={{ textAlign: "center", color: "#333", fontWeight: "bold", fontSize: 16, marginBottom: 20 }}>후기 작성 완료</Text>
                 <View style={ohstyles.review_contentBox}>
                   <View style={ohstyles.review_myBox}>
-                    <Text style={{color:"#333", fontWeight:"bold"}}>{myReview?.r_review}</Text>
+                    <Text style={{ color: "#333", fontWeight: "bold" }}>{myReview?.r_review}</Text>
                   </View>
                   <View style={ohstyles.review_reBox}>
-                    <Text style={{textAlign:"right", color:"white", fontWeight:"bold"}}>{myReview?.r_reply}</Text>
+                    <Text style={{ textAlign: "right", color: "white", fontWeight: "bold" }}>{myReview?.r_reply}</Text>
                   </View>
                 </View>
               </>
