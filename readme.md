@@ -25,7 +25,7 @@
 
 <br>
 
-##팀원 구성
+## 팀원 구성
 
 <div align="center">
 
@@ -34,3 +34,17 @@
 | [<img src="https://github.com/Ukdam/OMM_App/assets/92793487/717b987a-1cb3-4d9e-a2c1-dced07726f6f" height=150 width=150> <br/> @1Taron](https://github.com/1Taron) | [<img src="https://github.com/Ukdam/OMM_App/assets/92793487/311372aa-2adb-49fb-a35c-de7baac3ab55" height=150 width=150> <br/> @Ukdam](https://github.com/Ukdam) |
 
 </div>
+
+<br>
+
+## 1. 개발 환경
+- 통합 개발 환경 : Visual Studio
+- Hybrid APP: React Native, Expo, Websocket
+- Front : HTML, React, Websocket
+- Back-end : Express, Websocket, Multer, Mongodb
+- 버전 및 이슈관리 : Github, Github Issues
+- 협업 툴 : Discord, KakaoTalk
+- 디자인 : [Figma](https://www.figma.com/file/Lfp8VJ9vH2E31yZNRmz5y7/OMM?type=design&node-id=0-1&mode=design&t=682JxLZuCXy9MXht-0)
+- [Fontawesome](https://fontawesome.com/)
+
+<br>
